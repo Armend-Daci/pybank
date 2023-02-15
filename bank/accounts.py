@@ -14,6 +14,5 @@ class Bank:
 
 
 class CustomerAccount:
-    def __init__(self):
-        checking = Checking()
-        savings = Savings()
+    def __init__(self, bank):
+        self.bank = bank
