@@ -5,6 +5,9 @@ class Checking:
     def deposit(self, deposit):
         self.balanace += deposit
 
+    def getBalance(self):
+        return self.balance
+
 class Savings:
     def __init__(self, deposit):
         self.balance = deposit
@@ -12,13 +15,16 @@ class Savings:
     def deposit(self, deposit):
         self.balance += deposit
 
+    def getBalance(self):
+        return self.balance
 
 class Bank:
     def __init__(self, accountnum, checking, savings):
         self.accountnum = accountnum
         self.checking = checking
         self.savings = savings
-
+    def test(self):
+        return 5
 
 class CustomerAccount:
     def __init__(self, fname, lname, password, bank):

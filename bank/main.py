@@ -27,7 +27,13 @@ def initialize():
     list.append(customer3)
     list.append(customer4)
     list.append(customer5)
-    print(list)
+    print(list[0][3].checking.getBalance())
+    return list
+
+def initialmenu():
+    pass
+
 
 if __name__ == '__main__':
-    initialize()
+    list = initialize()
+    initialmenu()
