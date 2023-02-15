@@ -2,10 +2,15 @@ class Checking:
     def __init__(self, deposit):
         self.balance = deposit
 
+    def deposit(self, deposit):
+        self.balanace += deposit
 
 class Savings:
     def __init__(self, deposit):
         self.balance = deposit
+
+    def deposit(self, deposit):
+        self.balance += deposit
 
 
 class Bank:
@@ -21,3 +26,6 @@ class CustomerAccount:
         self.lname = lname
         self.password = password
         self.bank = bank
+
+    def __str__(self):
+        pass
