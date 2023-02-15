@@ -5,7 +5,8 @@ class Checking:
 
 
 class Savings:
-    pass
+    def __init__(self, deposit):
+        self.balance = deposit
 
 
 class Bank:
