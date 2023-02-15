@@ -14,5 +14,7 @@ class Bank:
 
 
 class CustomerAccount:
-    def __init__(self, bank):
+    def __init__(self, fname, lname, bank):
+        self.lname = fname
+        self.lname = lname
         self.bank = bank
