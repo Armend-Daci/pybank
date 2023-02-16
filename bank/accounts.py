@@ -26,6 +26,9 @@ class Bank:
     def test(self):
         return 5
 
+    def getAccount(self):
+        return self.accountnum
+
 class CustomerAccount:
     def __init__(self, fname, lname, password, bank):
         self.lname = fname
