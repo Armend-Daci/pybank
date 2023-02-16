@@ -196,6 +196,18 @@ def accountcreator(list, accounttype):
         return first
 
 
+def login(list, accountnum, pwd):
+    #temp = []
+
+    for key, values in enumerate(list):
+        print(values[3].getAccount(), accountnum)
+        if values[3].getAccount() == accountnum and values[3].getPassword() == pwd:
+            print(key)
+            return key
+    print("Incorrect login information. Please try again.")
+    return -1
+
+
 if __name__ == '__main__':
     list = initialize()
     print(list[0][3])
