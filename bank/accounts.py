@@ -41,3 +41,6 @@ class CustomerAccount:
 
     def getPassword(self):
         return self.password
+
+    def getBank(self):
+        return self.bank

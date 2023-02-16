@@ -4,30 +4,30 @@ def initialize():
     list = []
     check1 = Checking(8000)
     bank1 = Bank(10000, check1, None)
-    customer1 = ("Armend", "Daci", "1", bank1)
+    customer1 = CustomerAccount("Armend", "Daci", "1", bank1)
 
     check2 = Checking(6000)
     bank2 = Bank(10001, check2, None)
-    customer2 = ("Mersim", "Daci", "1", bank2)
+    customer2 = CustomerAccount("Mersim", "Daci", "1", bank2)
 
     check3 = Checking(1000)
     bank3 = Bank(10002, check3, None)
-    customer3 = ("John", "Wick", "1", bank3)
+    customer3 = CustomerAccount("John", "Wick", "1", bank3)
 
     check4 = Checking(84000)
     bank4 = Bank(10003, check4, None)
-    customer4 = ("Arny", "Schwartz", "1", bank4)
+    customer4 = CustomerAccount("Arny", "Schwartz", "1", bank4)
 
     check5 = Checking(4700)
     bank5 = Bank(10005, check5, None)
-    customer5 = ("Melvin", "Donovan", "1", bank5)
+    customer5 = CustomerAccount("Melvin", "Donovan", "1", bank5)
 
     list.append(customer1)
     list.append(customer2)
     list.append(customer3)
     list.append(customer4)
     list.append(customer5)
-    print(list[0][3].checking.getBalance())
+    print(list)
     return list
 
 def initialmenu():
@@ -40,7 +40,7 @@ def initialmenu():
     if decision == 1:
         num = -1
         accountnum = -1
-        """
+
         while num == -1 and accountnum < 10000:
             accountnum = int(input("What is your account number?"))
             pwd = input("What is your password?")
@@ -50,7 +50,7 @@ def initialmenu():
         print(list)
         amount = 0
         print(list[num].getBalance())
-        
+        """
         if list[num].isActive() is False and type == "C":
             print(
                 f"Please add more money into Checking Account#{list[num].getAccount}, current balance: {list[num].getBalance()}")
@@ -174,8 +174,8 @@ def accountcreator(list, accounttype):
     for key, values in enumerate(list):
         print(key)
         if key == 0:
-            start = values[3].getAccount()
-        accounts.append(values[3].getAccount())
+            start = values.getBank().getAccount()
+        accounts.append(values.getBank().getAccount())
 
     numbers = []
     for key, values in enumerate(accounts):
@@ -201,8 +201,8 @@ def login(list, accountnum, pwd):
     #temp = []
 
     for key, values in enumerate(list):
-        print(values[3].getAccount(), accountnum)
-        if values[3].getAccount() == accountnum and values[3].getPassword() == pwd:
+        print(values[3].getAccount(), accountnum, values)
+        if values[3].getAccount() == accountnum and values.getPassword() == pwd:
             print(key)
             return key
     print("Incorrect login information. Please try again.")
@@ -227,6 +227,5 @@ def finder(list, num, accountnum):
 
 if __name__ == '__main__':
     list = initialize()
-    print(list[0][3])
-    print(list)
+    print(list[2].getBank().getAccount())
     initialmenu()
