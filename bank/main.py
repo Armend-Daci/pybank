@@ -243,7 +243,15 @@ def viewer(list, num, type):
 
 
     if choice == "D" and type == "C":
-        pass
+        print("How much would you like to deposit in your Checking Account?")
+        print(f"Current Balance: {list.getAccount().getChecking().getBalance()}")
+        amount = int(input())
+        list[num].getAccount().getChecking().deposit(amount)
+    elif choice == "D" and type == "S":
+        print("How much would you like to deposit in your Savings Account?")
+        print(f"Current Balance: {list[num].getAccount().getSavings().getBalance()}")
+        amount = int(input())
+        list[num].getAccount().getSavings().deposit(amount)
     """
     if list[num].isActive() == False:
         print("Your account is deactivated due to too many withdrawals under $0.")
@@ -396,8 +404,6 @@ def viewer(list, num, type):
     """
 
 if __name__ == '__main__':
-    """
     list = initialize()
     print(list[0].getBank().getAccount())
     initialmenu()
-    """

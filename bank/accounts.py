@@ -48,13 +48,19 @@ class Bank:
 
 class CustomerAccount:
     def __init__(self, fname, lname, password, bank):
-        self.lname = fname
+        self.fname = fname
         self.lname = lname
         self.password = password
         self.bank = bank
 
     def __str__(self):
         pass
+
+    def getFName(self):
+        return self.fname
+
+    def getLName(self):
+        return self.lname
 
     def getPassword(self):
         return self.password
