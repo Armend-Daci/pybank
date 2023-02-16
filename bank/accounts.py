@@ -38,3 +38,6 @@ class CustomerAccount:
 
     def __str__(self):
         pass
+
+    def getPassword(self):
+        return self.password

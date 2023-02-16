@@ -50,6 +50,7 @@ def initialmenu():
         print(list)
         amount = 0
         print(list[num].getBalance())
+        
         if list[num].isActive() is False and type == "C":
             print(
                 f"Please add more money into Checking Account#{list[num].getAccount}, current balance: {list[num].getBalance()}")
