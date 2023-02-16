@@ -39,6 +39,12 @@ class Bank:
         elif self.savings and not self.savings:
             return "S"
 
+    def getChecking(self):
+        return self.checking
+
+    def getSavings(self):
+        return self.savings
+
 
 class CustomerAccount:
     def __init__(self, fname, lname, password, bank):
