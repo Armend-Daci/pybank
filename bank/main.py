@@ -199,10 +199,10 @@ def accountcreator(list, accounttype):
 
 def login(list, accountnum, pwd):
     #temp = []
-
+    print(list[0].getBank().getAccount())
     for key, values in enumerate(list):
-        print(values[3].getAccount(), accountnum, values)
-        if values[3].getAccount() == accountnum and values.getPassword() == pwd:
+        #print(values.getBank().getAccount(), accountnum, values)
+        if values.getBank().getAccount() == accountnum and values.getPassword() == pwd:
             print(key)
             return key
     print("Incorrect login information. Please try again.")
@@ -227,5 +227,5 @@ def finder(list, num, accountnum):
 
 if __name__ == '__main__':
     list = initialize()
-    print(list[2].getBank().getAccount())
+    print(list[0].getBank().getAccount())
     initialmenu()
