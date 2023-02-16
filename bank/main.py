@@ -107,7 +107,7 @@ def initialmenu():
                 deposit = int(input("How much would you like to deposit?"))
 
             if accounttype == "C":
-                accountnum = accountcreator(list)
+                accountnum = accountcreator(list,accounttype)
 
                 check = Checking(deposit)
                 bank = Bank(accountnum, check, None)
@@ -119,7 +119,7 @@ def initialmenu():
 
 
             elif accounttype == "S":
-                accountnum = accountcreator(list)
+                accountnum = accountcreator(list,accounttype)
 
                 savings = Savings(deposit)
                 bank = Bank(accountnum, None, savings)
@@ -163,11 +163,45 @@ def initialmenu():
                 main()
                 """
 
-def accountcreator(list):
+def accountcreator(list, accounttype):
+    first = 10000
+    accounts = []
+    if accounttype == "C":
+        checking = list[0]
+
+    for key, values in enumerate(list):
+        print(key)
+        if key == 0:
+            start = values[3].getAccount()
+        # print(key, values)
+        accounts.append(values[3].getAccount())
+        # print(accounts)
+
+    numbers = []
+    for key, values in enumerate(accounts):
+        numbers.append(values)
+    print(range(start, len(numbers)))
+    b = True
+    try:
+        while b is True:
+            print(numbers.index(first), first, numbers)
+            if first in numbers == False:
+                # numbers.index(first) != True:
+                b = False
+            first += 1
+            print(first)
+    except ValueError:
+        print("test")
+    finally:
+        print(first)
+        return first
+
     num = 10000
 
     return num
 
 if __name__ == '__main__':
     list = initialize()
+    print(list[0][3])
+    print(list)
     initialmenu()
