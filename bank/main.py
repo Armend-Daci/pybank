@@ -208,6 +208,22 @@ def login(list, accountnum, pwd):
     return -1
 
 
+def finder(list, num, accountnum):
+    total = 0
+
+    for key, values in enumerate(list):
+        print(values[3].accountType(), values[3].getAccount(), accountnum)
+        if values[3].getAccount() == accountnum:
+            if values[3].accountType() == "C":
+                type = "C"
+            else:
+                type = "S"
+            total += 1
+        if total == 2:
+            return "B"
+    return type
+
+
 if __name__ == '__main__':
     list = initialize()
     print(list[0][3])
