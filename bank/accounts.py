@@ -8,6 +8,9 @@ class Checking:
     def getBalance(self):
         return self.balance
 
+    def withdraw(self):
+        pass
+
 class Savings:
     def __init__(self, deposit):
         self.balance = deposit
@@ -17,6 +20,9 @@ class Savings:
 
     def getBalance(self):
         return self.balance
+
+    def withdraw(self):
+        pass
 
 class Bank:
     def __init__(self, accountnum, checking, savings):

@@ -252,6 +252,8 @@ def viewer(list, num, type):
         print(f"Current Balance: {list[num].getBank().getSavings().getBalance()}")
         amount = int(input())
         list[num].getBank().getSavings().deposit(amount)
+    elif choice == "W" and type == "C":
+
     """
     if list[num].isActive() == False:
         print("Your account is deactivated due to too many withdrawals under $0.")
