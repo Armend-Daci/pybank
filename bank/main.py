@@ -229,6 +229,7 @@ def finder(list, num, accountnum):
 
 
 def viewer(list, num, type):
+    bankaccount = list[num].getBank()
 
     if type == "C":
         print(
@@ -244,16 +245,36 @@ def viewer(list, num, type):
 
     if choice == "D" and type == "C":
         print("How much would you like to deposit in your Checking Account?")
-        print(f"Current Balance: {list[num].getBank().getChecking().getBalance()}")
+        print(f"Current Balance: {bankaccount.getChecking().getBalance()}")
         amount = int(input())
-        list[num].getBank().getChecking().deposit(amount)
+        bankaccount.getChecking().deposit(amount)
     elif choice == "D" and type == "S":
         print("How much would you like to deposit in your Savings Account?")
-        print(f"Current Balance: {list[num].getBank().getSavings().getBalance()}")
+        print(f"Current Balance: {bankaccount.getSavings().getBalance()}")
         amount = int(input())
-        list[num].getBank().getSavings().deposit(amount)
+        bankaccount.getSavings().deposit(amount)
     elif choice == "W" and type == "C":
-
+        print("How much would you like to withdraw from your Checking Account?")
+        print(f"Current Balance: {list[num].getBank().get.getBalance()}")
+        run = 0
+        while run == 0 or amount - list[num].getBalance() > -100:
+            run += 1
+            amount = int(input())
+            list[num].Withdraw(amount)
+            viewer(list, num, type)
+            # if list[num].getBalance() - amount < -100:
+            #   print("Amount entered is too large! You do not have sufficient funds.")
+    elif choice == "W" and type == "S":
+        print("How much would you like to withdraw from your Savings Account?")
+        print(f"Current Balance: {list[num].getBalance()}")
+        run = 0
+        while run == 0 or amount - list[num].getBalance() > -100:
+            run += 1
+            amount = int(input())
+            list[num].Withdraw(amount)
+            viewer(list, num, type)
+            # if list[num].getBalance() < -100:
+            #  print("Amount entered is too large! You do not have sufficient funds.")
     """
     if list[num].isActive() == False:
         print("Your account is deactivated due to too many withdrawals under $0.")
