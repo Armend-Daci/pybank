@@ -22,11 +22,16 @@ def initialize():
     bank5 = Bank(10005, check5, None)
     customer5 = CustomerAccount("Melvin", "Donovan", "1", bank5)
 
+    savings = Savings(50000)
+    banknew = Bank(10000, check1, Savings)
+    customerfinal = CustomerAccount("Armend", "Daci", "1", banknew)
+
     list.append(customer1)
     list.append(customer2)
     list.append(customer3)
     list.append(customer4)
     list.append(customer5)
+    list.append(customerfinal)
     print(list)
     return list
 
@@ -240,15 +245,32 @@ def viewer(list, num, type):
             f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Savings account #{list[num].getBank().getAccount()} is {list[num].getBank().getSavings().getBalance()}")
         choice = input("Would you like to deposit, withdraw, or transfer?").upper()
     elif type == "B":
-        pass
+        dualaccount = "A"
+        while dualaccount != "C" and dualaccount != "S":
+            print(f"Currently using Checking Account#{bankaccount.getAccount()}")
+            print("Would you like to switch to your Savings Account?(Y/N)")
+            dualaccount = input().upper()
+            if dualaccount == "Y":
+                dualaccount = "S"
+            elif dualaccount == "N":
+                dualaccount = "C"
+
+        if dualaccount == "C":
+            print(
+                f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Checking account #{list[num].getBank().getAccount()} is {list[num].getBank().getChecking().getBalance()}")
+            choice = input("Would you like to deposit, withdraw, or transfer?").upper()
+        elif dualaccount == "S":
+            print(
+                f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Checking account #{list[num].getBank().getAccount()} is {list[num].getBank().getChecking().getBalance()}")
+            choice = input("Would you like to deposit, withdraw, or transfer?").upper()
 
 
-    if choice == "D" and type == "C":
+    if choice == "D" and type == "C" or dualaccount == "C":
         print("How much would you like to deposit in your Checking Account?")
         print(f"Current Balance: {bankaccount.getChecking().getBalance()}")
         amount = int(input())
         bankaccount.getChecking().deposit(amount)
-    elif choice == "D" and type == "S":
+    elif choice == "D" and type == "S" or dualaccount == "S":
         print("How much would you like to deposit in your Savings Account?")
         print(f"Current Balance: {bankaccount.getSavings().getBalance()}")
         amount = int(input())
@@ -273,8 +295,7 @@ def viewer(list, num, type):
             amount = int(input())
             list[num].Withdraw(amount)
             viewer(list, num, type)
-            # if list[num].getBalance() < -100:
-            #  print("Amount entered is too large! You do not have sufficient funds.")
+
     """
     if list[num].isActive() == False:
         print("Your account is deactivated due to too many withdrawals under $0.")
