@@ -49,7 +49,7 @@ def initialmenu():
         type = finder(list, num, accountnum)
         print(list)
         amount = 0
-        print(list[num].getBalance())
+        #print(list.getBank().getBalance())
         """
         if list[num].isActive() is False and type == "C":
             print(
@@ -211,17 +211,18 @@ def login(list, accountnum, pwd):
 
 def finder(list, num, accountnum):
     total = 0
-
+    print(list[0].getBank().getAccountType)
     for key, values in enumerate(list):
-        print(values[3].accountType(), values[3].getAccount(), accountnum)
-        if values[3].getAccount() == accountnum:
-            if values[3].accountType() == "C":
+        print(values.getBank().getAccount(), accountnum)
+        if values.getBank().getAccount() == accountnum:
+            if values.getBank().getAccountType() == "C":
                 type = "C"
             else:
                 type = "S"
             total += 1
         if total == 2:
             return "B"
+    print(type)
     return type
 
 

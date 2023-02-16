@@ -29,6 +29,15 @@ class Bank:
     def getAccount(self):
         return self.accountnum
 
+    def getAccountType(self):
+        if self.checking and self.savings:
+            return "B"
+        elif self.checking and not self.savings:
+            return "C"
+        elif self.savings and not self.savings:
+            return "S"
+
+
 class CustomerAccount:
     def __init__(self, fname, lname, password, bank):
         self.lname = fname
