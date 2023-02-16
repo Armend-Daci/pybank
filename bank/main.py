@@ -232,11 +232,11 @@ def viewer(list, num, type):
 
     if type == "C":
         print(
-            f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Checking account #{list[num].getAccount()} is {list[num].getBalance()}")
+            f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Checking account #{list[num].getBank().getAccount()} is {list[num].getBank().getChecking().getBalance()}")
         choice = input("Would you like to deposit, withdraw, or transfer?").upper()
     elif type == "S":
         print(
-            f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Savings account #{list[num].getAccount()} is {list[num].getBalance()}")
+            f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Savings account #{list[num].getBank().getAccount()} is {list[num].getBank().getSavings().getBalance()}")
         choice = input("Would you like to deposit, withdraw, or transfer?").upper()
     elif type == "B":
         pass
@@ -244,14 +244,14 @@ def viewer(list, num, type):
 
     if choice == "D" and type == "C":
         print("How much would you like to deposit in your Checking Account?")
-        print(f"Current Balance: {list.getAccount().getChecking().getBalance()}")
+        print(f"Current Balance: {list[num].getBank().getChecking().getBalance()}")
         amount = int(input())
-        list[num].getAccount().getChecking().deposit(amount)
+        list[num].getBank().getChecking().deposit(amount)
     elif choice == "D" and type == "S":
         print("How much would you like to deposit in your Savings Account?")
-        print(f"Current Balance: {list[num].getAccount().getSavings().getBalance()}")
+        print(f"Current Balance: {list[num].getBank().getSavings().getBalance()}")
         amount = int(input())
-        list[num].getAccount().getSavings().deposit(amount)
+        list[num].getBank().getSavings().deposit(amount)
     """
     if list[num].isActive() == False:
         print("Your account is deactivated due to too many withdrawals under $0.")

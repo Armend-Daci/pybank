@@ -3,7 +3,7 @@ class Checking:
         self.balance = deposit
 
     def deposit(self, deposit):
-        self.balanace += deposit
+        self.balance += deposit
 
     def getBalance(self):
         return self.balance
