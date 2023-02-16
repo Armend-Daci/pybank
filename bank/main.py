@@ -117,14 +117,19 @@ def initialmenu():
                 print(
                     f"Success {fname} {lname} has created account number {accountnum} with a total balance of {deposit}!")
 
-                """
-            else:
-                print(list)
+
+            elif accounttype == "S":
                 accountnum = accountcreator(list)
-                list.append(Savings(fname, lname, pwd, accountnum, deposit))
+
+                savings = Savings(deposit)
+                bank = Bank(accountnum, None, savings)
+                customer = (fname, lname, pwd, bank)
+
+                list.append(customer)
                 print(
                     f"Success {fname} {lname} has created account number {accountnum} with a total balance of {deposit}!")
-                main()
+
+        """
         elif exists == "Y":
             num = -1
             accountnum = -1
