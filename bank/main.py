@@ -23,7 +23,7 @@ def initialize():
     customer5 = CustomerAccount("Melvin", "Donovan", "1", bank5)
 
     savings = Savings(50000)
-    banknew = Bank(10000, check1, Savings)
+    banknew = Bank(10000, check1, savings)
     customerfinal = CustomerAccount("Armend", "Daci", "1", banknew)
 
     list.append(customer1)
@@ -235,7 +235,7 @@ def finder(list, num, accountnum):
 
 def viewer(list, num, type):
     bankaccount = list[num].getBank()
-
+    dualaccount = ""
     if type == "C":
         print(
             f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Checking account #{list[num].getBank().getAccount()} is {list[num].getBank().getChecking().getBalance()}")
@@ -269,7 +269,7 @@ def viewer(list, num, type):
             savings = bankaccount.getSavings()
 
     print(choice)
-    if choice == "D" and type == "C" or dualaccount == "C" and type == "B" and  choice == "D":
+    if choice == "D" and type == "C" or dualaccount == "C" and type == "B" and choice == "D":
         print("How much would you like to deposit in your Checking Account?")
         print(f"Current Balance: {checking.getBalance()}")
         amount = int(input())
@@ -279,7 +279,7 @@ def viewer(list, num, type):
         print(f"Current Balance: {savings.getBalance()}")
         amount = int(input())
         bankaccount.getSavings().deposit(amount)
-    elif choice == "W" and type == "C" or dualaccount == "C":
+    elif choice == "W" and type == "C" or dualaccount == "C" and type == "B" and choice == "W":
         print("How much would you like to withdraw from your Checking Account?")
         print(f"Current Balance: {checking.getBalance()}")
         run = 0

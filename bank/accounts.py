@@ -1,6 +1,7 @@
 class Checking:
     def __init__(self, deposit):
         self.balance = deposit
+        self.isActive = True
 
     def deposit(self, deposit):
         self.balance += deposit
@@ -14,6 +15,7 @@ class Checking:
 class Savings:
     def __init__(self, deposit):
         self.balance = deposit
+        self.isActive = True
 
     def deposit(self, deposit):
         self.balance += deposit
