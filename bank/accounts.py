@@ -8,7 +8,7 @@ class Checking:
     def getBalance(self):
         return self.balance
 
-    def withdraw(self):
+    def withdraw(self, amount):
         pass
 
 class Savings:
@@ -21,7 +21,7 @@ class Savings:
     def getBalance(self):
         return self.balance
 
-    def withdraw(self):
+    def withdraw(self, amount):
         pass
 
 class Bank:
