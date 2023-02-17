@@ -240,10 +240,12 @@ def viewer(list, num, type):
         print(
             f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Checking account #{list[num].getBank().getAccount()} is {list[num].getBank().getChecking().getBalance()}")
         choice = input("Would you like to deposit, withdraw, or transfer?").upper()
+        checking = bankaccount.getChecking()
     elif type == "S":
         print(
             f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Savings account #{list[num].getBank().getAccount()} is {list[num].getBank().getSavings().getBalance()}")
         choice = input("Would you like to deposit, withdraw, or transfer?").upper()
+        savings = bankaccount.getSavings()
     elif type == "B":
         dualaccount = "A"
         while dualaccount != "C" and dualaccount != "S":
@@ -259,10 +261,12 @@ def viewer(list, num, type):
             print(
                 f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Checking account #{list[num].getBank().getAccount()} is {list[num].getBank().getChecking().getBalance()}")
             choice = input("Would you like to deposit, withdraw, or transfer?").upper()
+            checking = bankaccount.getChecking()
         elif dualaccount == "S":
             print(
                 f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Checking account #{list[num].getBank().getAccount()} is {list[num].getBank().getChecking().getBalance()}")
             choice = input("Would you like to deposit, withdraw, or transfer?").upper()
+            savings = bankaccount.getSavings()
 
     print(choice)
     if choice == "D" and type == "C" or dualaccount == "C" and type == "B" and  choice == "D":
