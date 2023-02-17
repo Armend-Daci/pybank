@@ -264,20 +264,20 @@ def viewer(list, num, type):
                 f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Checking account #{list[num].getBank().getAccount()} is {list[num].getBank().getChecking().getBalance()}")
             choice = input("Would you like to deposit, withdraw, or transfer?").upper()
 
-
-    if choice == "D" and type == "C" or dualaccount == "C":
+    print(choice)
+    if choice == "D" and type == "C" or dualaccount == "C" and type == "B" and  choice == "D":
         print("How much would you like to deposit in your Checking Account?")
         print(f"Current Balance: {bankaccount.getChecking().getBalance()}")
         amount = int(input())
         bankaccount.getChecking().deposit(amount)
-    elif choice == "D" and type == "S" or dualaccount == "S":
+    elif choice == "D" and type == "S" or dualaccount == "S" and type == "B":
         print("How much would you like to deposit in your Savings Account?")
         print(f"Current Balance: {bankaccount.getSavings().getBalance()}")
         amount = int(input())
         bankaccount.getSavings().deposit(amount)
-    elif choice == "W" and type == "C":
+    elif choice == "W" and type == "C" or dualaccount == "C":
         print("How much would you like to withdraw from your Checking Account?")
-        print(f"Current Balance: {list[num].getBank().get.getBalance()}")
+        print(f"Current Balance: {list[num].getBank().getBalance()}")
         run = 0
         while run == 0 or amount - list[num].getBalance() > -100:
             run += 1
@@ -286,7 +286,7 @@ def viewer(list, num, type):
             viewer(list, num, type)
             # if list[num].getBalance() - amount < -100:
             #   print("Amount entered is too large! You do not have sufficient funds.")
-    elif choice == "W" and type == "S":
+    elif choice == "W" and type == "S" or dualaccount == "S":
         print("How much would you like to withdraw from your Savings Account?")
         print(f"Current Balance: {list[num].getBalance()}")
         run = 0
