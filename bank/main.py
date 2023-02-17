@@ -271,33 +271,33 @@ def viewer(list, num, type):
     print(choice)
     if choice == "D" and type == "C" or dualaccount == "C" and type == "B" and  choice == "D":
         print("How much would you like to deposit in your Checking Account?")
-        print(f"Current Balance: {bankaccount.getChecking().getBalance()}")
+        print(f"Current Balance: {checking.getBalance()}")
         amount = int(input())
         bankaccount.getChecking().deposit(amount)
     elif choice == "D" and type == "S" or dualaccount == "S" and type == "B":
         print("How much would you like to deposit in your Savings Account?")
-        print(f"Current Balance: {bankaccount.getSavings().getBalance()}")
+        print(f"Current Balance: {savings.getBalance()}")
         amount = int(input())
         bankaccount.getSavings().deposit(amount)
     elif choice == "W" and type == "C" or dualaccount == "C":
         print("How much would you like to withdraw from your Checking Account?")
-        print(f"Current Balance: {list[num].getBank().getBalance()}")
+        print(f"Current Balance: {checking.getBalance()}")
         run = 0
-        while run == 0 or amount - list[num].getBalance() > -100:
+        while run == 0 or amount - checking.getBalance() > -100:
             run += 1
             amount = int(input())
-            list[num].Withdraw(amount)
+            checking.withdraw(amount)
             viewer(list, num, type)
             # if list[num].getBalance() - amount < -100:
             #   print("Amount entered is too large! You do not have sufficient funds.")
     elif choice == "W" and type == "S" or dualaccount == "S":
         print("How much would you like to withdraw from your Savings Account?")
-        print(f"Current Balance: {list[num].getBalance()}")
+        print(f"Current Balance: {savings.getBalance()}")
         run = 0
-        while run == 0 or amount - list[num].getBalance() > -100:
+        while run == 0 or amount - savings.getBalance() > -100:
             run += 1
             amount = int(input())
-            list[num].Withdraw(amount)
+            savings.Withdraw(amount)
             viewer(list, num, type)
 
     """
