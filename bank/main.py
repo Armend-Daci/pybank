@@ -1,42 +1,6 @@
 from bank.accounts import *
 
 
-def initialize():
-    list = []
-    check1 = Checking(8000)
-    bank1 = Bank(10000, check1, None)
-    customer1 = CustomerAccount("Armend", "Daci", "1", bank1)
-
-    check2 = Checking(6000)
-    bank2 = Bank(10001, check2, None)
-    customer2 = CustomerAccount("Mersim", "Daci", "1", bank2)
-
-    check3 = Checking(1000)
-    bank3 = Bank(10002, check3, None)
-    customer3 = CustomerAccount("John", "Wick", "1", bank3)
-
-    check4 = Checking(84000)
-    bank4 = Bank(10003, check4, None)
-    customer4 = CustomerAccount("Arny", "Schwartz", "1", bank4)
-
-    check5 = Checking(4700)
-    bank5 = Bank(10005, check5, None)
-    customer5 = CustomerAccount("Melvin", "Donovan", "1", bank5)
-
-    savings = Savings(50000)
-    banknew = Bank(10000, check1, savings)
-    customerfinal = CustomerAccount("Armend", "Daci", "1", banknew)
-
-    list.append(customer1)
-    list.append(customer2)
-    list.append(customer3)
-    list.append(customer4)
-    list.append(customer5)
-    list.append(customerfinal)
-    print(list)
-    return list
-
-
 def initialmenu():
     print("What would you like to do? 1- Log in. 2- Create a new account.")
     decision = int(input(""))
