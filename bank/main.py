@@ -452,6 +452,7 @@ def viewer(list, num, type):
     """
 
 if __name__ == '__main__':
+
     list = initialize()
     print(list[0].getBank().getAccount())
     initialmenu()
