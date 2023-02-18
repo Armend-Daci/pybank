@@ -50,7 +50,8 @@ def initialmenu():
         while num == -1 and accountnum < 10000:
             accountnum = int(input("What is your account number?"))
             pwd = input("What is your password?")
-            num = login(list, accountnum, pwd)  # login function provides element in array of account
+            num = login(data, accountnum, pwd)  # login function provides element in array of account
+
 
         type = finder(list, num, accountnum)  # finder checks for if you have a C, S or B
         print(list)
@@ -205,16 +206,13 @@ def accountcreator(list, accounttype):
         return first
 
 
-def login(list, accountnum, pwd):
+def login(data, accountnum, pwd):
     # temp = []
-    print(list[0].getBank().getAccount())
-    for key, values in enumerate(list):
-        # print(values.getBank().getAccount(), accountnum, values)
-        if values.getBank().getAccount() == accountnum and values.getPassword() == pwd:
-            print(key)
-            return key
-    print("Incorrect login information. Please try again.")
-    return -1
+    if accountnum in data and data[accountnum]['password'] == pwd:
+        return accountnum
+    else:
+        print("Account not found!")
+        return -1
 
 
 def finder(list, num, accountnum):
@@ -455,9 +453,8 @@ def viewer(list, num, type):
 if __name__ == '__main__':
     data = {}
     file = open("bank/bank.csv", "r")
-    begin = 0
+
     for line in file:
-        print(begin)
         row = line.split(';')
         data[int(row[0])] = {
             'first_name': row[1],
@@ -466,12 +463,7 @@ if __name__ == '__main__':
             'checking': Checking(row[4]),
             'savings': Savings(row[5])
         }
-        begin += 1
-    print(data[10001])
 
 
-    """
-    list = initialize()
-    print(list[0].getBank().getAccount())
-    initialmenu()"""
+    initialmenu()
     file.close()
