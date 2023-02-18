@@ -10,7 +10,13 @@ class Checking:
         return self.balance
 
     def withdraw(self, amount):
-        pass
+        if amount <= self.balance:
+            self.balance -= amount
+            print(f"Transaction successful. New balance is: {self.balance}")
+        elif amount > self.balance and self.balance - amount > -100:
+            self.balance = self.balance - amount - 35
+            print(f"You have withdrawn more than your current balance, so an overdraft fee of $35 has been applied.")
+            print(f"New balance is: {self.balance}")
 
 class Savings:
     def __init__(self, deposit):
@@ -24,7 +30,13 @@ class Savings:
         return self.balance
 
     def withdraw(self, amount):
-        pass
+        if amount <= self.balance:
+            self.balance -= amount
+            print(f"Transaction successful. New balance is: {self.balance}")
+        elif amount > self.balance and self.balance - amount > -100:
+            self.balance = self.balance - amount - 35
+            print(f"You have withdrawn more than your current balance, so an overdraft fee of $35 has been applied.")
+            print(f"New balance is: {self.balance}")
 
 class Bank:
     def __init__(self, accountnum, checking, savings):

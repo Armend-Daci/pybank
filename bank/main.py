@@ -297,7 +297,7 @@ def viewer(list, num, type):
         while run == 0 or amount - savings.getBalance() > -100:
             run += 1
             amount = int(input())
-            savings.Withdraw(amount)
+            savings.withdraw(amount)
             viewer(list, num, type)
 
     """
