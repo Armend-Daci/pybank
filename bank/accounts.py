@@ -19,6 +19,8 @@ class Checking:
             print(f"New balance is: {self.balance}")
         elif self.balance - amount < -100:
             print(f"The amount you have selected is too big! Transaction Failed")
+
+
 class Savings:
     def __init__(self, deposit):
         self.balance = deposit
@@ -41,12 +43,27 @@ class Savings:
         elif self.balance - amount < -100:
             print(f"The amount you have selected is too big! Transaction Failed")
 
-class Bank:
-    def __init__(self, accountnum, checking, savings):
-        self.accountnum = accountnum
-        self.checking = checking
-        self.savings = savings
 
+class Bank:
+    data = {}
+
+    def __init__(self):
+        Bank.__read_data()
+
+    @classmethod
+    def __read_data(cls):
+        print(1)
+        file = open("bank/bank.csv", "r")
+        for line in file:
+            row = line.split(';')
+            Bank.data[int(row[0])] = {
+                'first_name': row[1],
+                'last_name': row[2],
+                'password': row[3],
+                'checking': Checking(row[4]),
+                'savings': Savings(row[5])
+            }
+        file.close()
 
     def test(self):
         return 5
@@ -75,6 +92,9 @@ class CustomerAccount:
         self.lname = lname
         self.password = password
         self.bank = bank
+
+    def __init__(self):
+        pass
 
     def __str__(self):
         pass

@@ -50,11 +50,13 @@ def initialmenu():
         while num == -1 and accountnum < 10000:
             accountnum = int(input("What is your account number?"))
             pwd = input("What is your password?")
-            num = login(data, accountnum, pwd)  # login function provides element in array of account
+            num = login(b.data, accountnum, pwd)  # login function provides element in array of account
 
-
-        type = finder(list, num, accountnum)  # finder checks for if you have a C, S or B
-        print(list)
+        user = {}
+        user = b.data[num]
+        print(user)
+        #type = finder(list, num, accountnum)  # finder checks for if you have a C, S or B
+        #print(list)
         amount = 0
         # print(list.getBank().getBalance())
         """
@@ -117,7 +119,7 @@ def initialmenu():
                 deposit = int(input("How much would you like to deposit?"))
 
             if accounttype == "C":
-                accountnum = accountcreator(list, accounttype)
+                accountnum = accountcreator(b.data, accounttype)
 
                 check = Checking(deposit)
                 bank = Bank(accountnum, check, None)
@@ -129,7 +131,7 @@ def initialmenu():
 
 
             elif accounttype == "S":
-                accountnum = accountcreator(list, accounttype)
+                accountnum = accountcreator(b.data, accounttype)
 
                 savings = Savings(deposit)
                 bank = Bank(accountnum, None, savings)
@@ -177,24 +179,16 @@ def initialmenu():
 def accountcreator(list, accounttype):
     first = 10000
     accounts = []
-    if accounttype == "C":
-        checking = list[0]
 
     for key, values in enumerate(list):
-        print(key)
-        if key == 0:
-            start = values.getBank().getAccount()
-        accounts.append(values.getBank().getAccount())
+        print(key, values)
+        accounts.append(values)
 
-    numbers = []
-    for key, values in enumerate(accounts):
-        numbers.append(values)
-    print(range(start, len(numbers)))
     b = True
     try:
         while b is True:
-            print(numbers.index(first), first, numbers)
-            if first in numbers == False:
+            print(accounts.index(first), first, accounts)
+            if first in accounts == False:
                 # numbers.index(first) != True:
                 b = False
             first += 1
@@ -217,7 +211,7 @@ def login(data, accountnum, pwd):
 
 def finder(list, num, accountnum):
     total = 0
-    print(list[0].getBank().getAccountType)
+    #print(list[0].getBank().getAccountType)
     for key, values in enumerate(list):
         print(values.getBank().getAccount(), accountnum)
         if values.getBank().getAccount() == accountnum:
@@ -299,171 +293,9 @@ def viewer(list, num, type):
             savings.withdraw(amount)
             viewer(list, num, type)
 
-    """
-    if list[num].isActive() == False:
-        print("Your account is deactivated due to too many withdrawals under $0.")
-        main()
-    
-    if type == "C":
-        print(
-            f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Checking account #{list[num].getAccount()} is {list[num].getBalance()}")
-        choice = input("Would you like to deposit, withdraw, or transfer?").upper()
-    elif type == "S":
-        print(
-            f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Savings account #{list[num].getAccount()} is {list[num].getBalance()}")
-        choice = input("Would you like to deposit, withdraw, or transfer?").upper()
-    
-    elif type == "B":
-        accounttype = "A"
-        while accounttype != "C" and accounttype != "S":
-            print("Would you like to use your Checking or Savings Account? C/S")
-            accounttype = input().upper()
-            print(list[num].getAccount(), accounttype, list[num].accountType(), "test")
-        if accounttype == "C" and list[num].accountType() == "C":
-            type = accounttype
-            print(
-                f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Checking account #{list[num].getAccount()} is {list[num].getBalance()}")
-            choice = input("Would you like to deposit, withdraw, or transfer?").upper()
-            print(choice)
-            if choice == "T":
-                print("Would you like to transfer to another account or your Savings Account? (A/S)")
-                self = input()
-                if self == "S":
-                    print("How much would you like to transfer to your Savings Account?")
-                    amount = int(input())
-                    transferMoneySelf(list[num], list, amount)
 
-        elif accounttype == "S" and list[num].accountType() == "S":
-            type = accounttype
-            print(
-                f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Savings account #{list[num].getAccount()} is {list[num].getBalance()}")
-            choice = input("Would you like to deposit, withdraw, or transfer?").upper()
-            if choice == "T":
-                print("Would you like to transfer to another account or your Savings Account? (A/S)")
-                self = input()
-                if self == "S":
-                    print("How much would you like to transfer to your Savings Account?")
-                    amount = int(input())
-                    transferMoneySelf(list[num], list, amount)
-
-        elif accounttype == "C" and list[
-            num].accountType() == "S":  # This is used to find the other Account a user may have to switch to the users desired account
-            type = accounttype
-            list[num] = switchAccount(list, accounttype, list[num].getAccount())
-            print(list[num].accountType())
-            choice = input("Would you like to deposit, withdraw, or transfer?").upper()
-            if choice == "T":
-                print("Would you like to transfer to another account or your Savings Account? (A/S)")
-                self = input()
-                if self == "S":
-                    print("How much would you like to transfer to your Savings Account?")
-                    amount = int(input())
-                    transferMoneySelf(list[num], list, amount)
-
-        elif accounttype == "S" and list[num].accountType() == "C":
-            type = accounttype
-            list[num] = switchAccount(list, accounttype, list[num].getAccount())
-            print(list[num])
-            print(list[num].getAccount())
-            choice = input("Would you like to deposit, withdraw, or transfer?").upper()
-            if choice == "T":
-                print("Would you like to transfer to another account or your Savings Account? (A/S)")
-                self = input()
-                if self == "S":
-                    print("How much would you like to transfer to your Savings Account?")
-                    amount = int(input())
-                    transferMoneySelf(list[num], list, amount)
-    print(choice, type)
-    
-    if choice == "D" and type == "C":
-        print("How much would you like to deposit in your Checking Account?")
-        print(f"Current Balance: {list[num].getBalance()}")
-        amount = int(input())
-        list[num].Deposit(amount)
-    elif choice == "D" and type == "S":
-        print("How much would you like to deposit in your Savings Account?")
-        print(f"Current Balance: {list[num].getBalance()}")
-        amount = int(input())
-        list[num].Deposit(amount)
-    elif choice == "W" and type == "C":
-        print("How much would you like to withdraw from your Checking Account?")
-        print(f"Current Balance: {list[num].getBalance()}")
-        run = 0
-        while run == 0 or amount - list[num].getBalance() > -100:
-            run += 1
-            amount = int(input())
-            list[num].Withdraw(amount)
-            viewer(list, num, type)
-            # if list[num].getBalance() - amount < -100:
-            #   print("Amount entered is too large! You do not have sufficient funds.")
-    elif choice == "W" and type == "S":
-        print("How much would you like to withdraw from your Savings Account?")
-        print(f"Current Balance: {list[num].getBalance()}")
-        run = 0
-        while run == 0 or amount - list[num].getBalance() > -100:
-            run += 1
-            amount = int(input())
-            list[num].Withdraw(amount)
-            viewer(list, num, type)
-            # if list[num].getBalance() < -100:
-            #  print("Amount entered is too large! You do not have sufficient funds.")
-    elif choice == "T" and type == "C" or type != "B":
-        transferaccount = int(input("What is the account number you would like to transfer money to?"))
-        amount = int(input(
-            f"Current balance is: {list[num].getBalance()}, how much would you like to transfer from Account#{list[num].getAccount()}"))
-        checking = input("Is this a checking account? (T or F)").upper()
-        if choice == "T":
-            print("Would you like to transfer to another account or your Savings Account? (A/S)")
-            self = input()
-            if self == "S":
-                print("How much would you like to transfer to your Savings Account?")
-                amount = int(input())
-                transferMoneySelf(list[num], list, amount)
-        if checking == "T":
-            checking = True
-        else:
-            checking = False
-        if self != "S":
-            transferMoney(list[num], transferaccount, checking, amount, list)
-    elif choice == "T" and type == "S" and accounttype != "B":
-        transferaccount = int(input("What is the account number you would like to transfer money to?"))
-        amount = int(input(
-            f"Current balance is: {list[num].getBalance()}, how much would you like to transfer from Account#{list[num].getAccount()}"))
-
-    elif choice == "T" and type == "C" and accounttype == "B":
-        transferaccount = int(input("What is the account number you would like to transfer money to?"))
-        amount = int(input(
-            f"Current balance is: {list[num].getBalance()}, how much would you like to transfer from Account#{list[num].getAccount()}"))
-    elif choice == "T" and type == "S" and accounttype == "B":
-        transferaccount = int(input("What is the account number you would like to transfer money to?"))
-        amount = int(input(
-            f"Current balance is: {list[num].getBalance()}, how much would you like to transfer from Account#{list[num].getAccount()}"))
-
-    print("Would you like to do anything else? Y/N")
-    end = input().upper()
-    if end == "N":
-        print("Would you like to go to main menu? Y/N")
-        mainchoice = input().upper()
-        if mainchoice == "Y":
-            main()
-    elif end == "Y":
-        viewer(list, num, type)
-    """
 
 if __name__ == '__main__':
-    data = {}
-    file = open("bank/bank.csv", "r")
-
-    for line in file:
-        row = line.split(';')
-        data[int(row[0])] = {
-            'first_name': row[1],
-            'last_name': row[2],
-            'password': row[3],
-            'checking': Checking(row[4]),
-            'savings': Savings(row[5])
-        }
-
-
+    b = Bank()
     initialmenu()
-    file.close()
+
