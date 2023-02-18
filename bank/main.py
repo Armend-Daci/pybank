@@ -1,5 +1,6 @@
 from bank.accounts import *
 
+
 def initialize():
     list = []
     check1 = Checking(8000)
@@ -35,8 +36,8 @@ def initialize():
     print(list)
     return list
 
-def initialmenu():
 
+def initialmenu():
     print("What would you like to do? 1- Log in. 2- Create a new account.")
     decision = int(input(""))
 
@@ -49,12 +50,12 @@ def initialmenu():
         while num == -1 and accountnum < 10000:
             accountnum = int(input("What is your account number?"))
             pwd = input("What is your password?")
-            num = login(list, accountnum, pwd)                  #login function provides element in array of account
-        
-        type = finder(list, num, accountnum)                    #finder checks for if you have a C, S or B
+            num = login(list, accountnum, pwd)  # login function provides element in array of account
+
+        type = finder(list, num, accountnum)  # finder checks for if you have a C, S or B
         print(list)
         amount = 0
-        #print(list.getBank().getBalance())
+        # print(list.getBank().getBalance())
         """
         if list[num].isActive() is False and type == "C":
             print(
@@ -115,7 +116,7 @@ def initialmenu():
                 deposit = int(input("How much would you like to deposit?"))
 
             if accounttype == "C":
-                accountnum = accountcreator(list,accounttype)
+                accountnum = accountcreator(list, accounttype)
 
                 check = Checking(deposit)
                 bank = Bank(accountnum, check, None)
@@ -127,7 +128,7 @@ def initialmenu():
 
 
             elif accounttype == "S":
-                accountnum = accountcreator(list,accounttype)
+                accountnum = accountcreator(list, accounttype)
 
                 savings = Savings(deposit)
                 bank = Bank(accountnum, None, savings)
@@ -205,10 +206,10 @@ def accountcreator(list, accounttype):
 
 
 def login(list, accountnum, pwd):
-    #temp = []
+    # temp = []
     print(list[0].getBank().getAccount())
     for key, values in enumerate(list):
-        #print(values.getBank().getAccount(), accountnum, values)
+        # print(values.getBank().getAccount(), accountnum, values)
         if values.getBank().getAccount() == accountnum and values.getPassword() == pwd:
             print(key)
             return key
@@ -452,7 +453,25 @@ def viewer(list, num, type):
     """
 
 if __name__ == '__main__':
+    data = {}
+    file = open("bank/bank.csv", "r")
+    begin = 0
+    for line in file:
+        print(begin)
+        row = line.split(';')
+        data[int(row[0])] = {
+            'first_name': row[1],
+            'last_name': row[2],
+            'password': row[3],
+            'checking': Checking(row[4]),
+            'savings': Savings(row[5])
+        }
+        begin += 1
+    print(data[10001])
 
+
+    """
     list = initialize()
     print(list[0].getBank().getAccount())
-    initialmenu()
+    initialmenu()"""
+    file.close()
