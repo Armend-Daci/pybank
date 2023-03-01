@@ -22,7 +22,7 @@ def initialmenu():
         print(type(p))
         print(user['checking'].getBalance(), user['savings'].getBalance())
         print(p.split(" "), 'NO_SAVINGS')
-        print(type(p), type('NO_SAVINGS'))
+        print(b.data[num], user, type('NO_SAVINGS'))
         if b.data[num] == user and p == "NO_CHECKING":
             accounttype = "S"
         elif b.data[num] == user and "NO_SAVINGS" in str(user['savings']): #'== "NO_SAVINGS":
@@ -73,7 +73,7 @@ def initialmenu():
             success(list[num])
             # print(f"Please add more money into Savings Account#{list[num].getAccount()}")
         """
-
+        print(accounttype)
         if accounttype == "B":
             viewer(user, num, accounttype)
         elif accounttype == "C":
@@ -245,10 +245,12 @@ def viewer(user, num, type):
         checking.deposit(amount)
         print(checking.getBalance())
     elif choice == "D" and type == "S" or dualaccount == "S" and type == "B":
+        savings = user['savings']
         print("How much would you like to deposit in your Savings Account?")
-        print(f"Current Balance: {savings.getBalance()}")
+        print(f"Current Balance: {savings}")
         amount = float(input())
-        bankaccount.getSavings().deposit(amount)
+        savings.deposit(amount)
+        print(savings.getBalance())
     elif choice == "W" and type == "C" or dualaccount == "C" and type == "B" and choice == "W":
         print("How much would you like to withdraw from your Checking Account?")
         print(f"Current Balance: {checking.getBalance()}")

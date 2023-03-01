@@ -33,6 +33,10 @@ class Checking:
 
 class Savings:
     def __init__(self, deposit):
+        self.balance = float(0)
+        if deposit != "NO_CHECKING":
+            print(deposit)
+            deposit = float(deposit)
         self.balance = deposit
         self.isActive = True
 
