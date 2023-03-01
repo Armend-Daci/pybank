@@ -238,14 +238,16 @@ def viewer(user, num, type):
 
     print(choice)
     if choice == "D" and type == "C" or dualaccount == "C" and type == "B" and choice == "D":
+        checking = user["checking"]
         print("How much would you like to deposit in your Checking Account?")
-        print(f"Current Balance: {checking.getBalance()}")
-        amount = int(input())
-        bankaccount.getChecking().deposit(amount)
+        print(f"Current Balance: {checking}")
+        amount = float(input())
+        checking.deposit(amount)
+        print(checking.getBalance())
     elif choice == "D" and type == "S" or dualaccount == "S" and type == "B":
         print("How much would you like to deposit in your Savings Account?")
         print(f"Current Balance: {savings.getBalance()}")
-        amount = int(input())
+        amount = float(input())
         bankaccount.getSavings().deposit(amount)
     elif choice == "W" and type == "C" or dualaccount == "C" and type == "B" and choice == "W":
         print("How much would you like to withdraw from your Checking Account?")
@@ -267,7 +269,12 @@ def viewer(user, num, type):
             amount = int(input())
             savings.withdraw(amount)
             viewer(list, num, type)
-
+    newchoice = ""
+    while newchoice != "Y" and newchoice != "N":
+        print("Would you like to do anything else?")
+        newchoice = input().upper()
+    if newchoice == "N":
+        return 0
 
 
 if __name__ == '__main__':

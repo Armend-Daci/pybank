@@ -1,5 +1,9 @@
 class Checking:
     def __init__(self, deposit):
+        self.balance = float(0)
+        if deposit != "NO_CHECKING":
+            print(deposit)
+            deposit = float(deposit)
         self.balance = deposit
         self.isActive = True
 
@@ -7,7 +11,7 @@ class Checking:
         if self.balance == ['NO_CHECKING\n']:
             return "NO_CHECKING"
         else:
-            return self.balance
+            return str(self.balance)
 
     def deposit(self, deposit):
         self.balance += deposit
@@ -36,7 +40,7 @@ class Savings:
         if self.balance == ['NO_SAVINGS\n']:
             return "NO_SAVINGS"
         else:
-            return self.balance
+            return str(self.balance)
     def deposit(self, deposit):
         self.balance += deposit
 
