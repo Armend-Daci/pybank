@@ -18,11 +18,22 @@ def initialmenu():
 
         user = {}
         user = b.data[num]
-        print(user)
+        p = str(user['savings'].getBalance())
+        print(type(p))
+        print(user['checking'].getBalance(), user['savings'].getBalance())
+        print(p.split(" "), 'NO_SAVINGS')
+        print(type(p), type('NO_SAVINGS'))
+        if b.data[num] == user and p == "NO_CHECKING":
+            accounttype = "S"
+        elif b.data[num] == user and "NO_SAVINGS" in str(user['savings']): #'== "NO_SAVINGS":
+            accounttype = "C"
+            print(1)
+        elif b.data[num] == user and user['checking'].getBalance() != "NO_CHECKING" and user['savings'].getBalance() != "NO_SAVINGS":
+            accounttype = "B"
+        print(str(user['savings']))
+        input()
         #type = finder(list, num, accountnum)  # finder checks for if you have a C, S or B
-        #print(list)
         amount = 0
-        # print(list.getBank().getBalance())
         """
         if list[num].isActive() is False and type == "C":
             print(
@@ -63,12 +74,12 @@ def initialmenu():
             # print(f"Please add more money into Savings Account#{list[num].getAccount()}")
         """
 
-        if type == "B":
-            viewer(list, num, type)
-        elif type == "C":
-            viewer(list, num, type)
-        elif type == "S":
-            viewer(list, num, type)
+        if accounttype == "B":
+            viewer(user, num, accounttype)
+        elif accounttype == "C":
+            viewer(user, num, accounttype)
+        elif accounttype == "S":
+            viewer(user, num, accounttype)
 
     elif decision == 2:
         print("Do you have an account? Y/N")
@@ -190,19 +201,19 @@ def finder(list, num, accountnum):
     return type
 
 
-def viewer(list, num, type):
-    bankaccount = list[num].getBank()
+def viewer(user, num, type):
     dualaccount = ""
+    print(type)
     if type == "C":
         print(
-            f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Checking account #{list[num].getBank().getAccount()} is {list[num].getBank().getChecking().getBalance()}")
+            f"Hello {user['first_name']} {user['last_name']}, the balance for Checking account #{num} is {user['checking'].getBalance()}")
         choice = input("Would you like to deposit, withdraw, or transfer?").upper()
-        checking = bankaccount.getChecking()
+
     elif type == "S":
         print(
             f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Savings account #{list[num].getBank().getAccount()} is {list[num].getBank().getSavings().getBalance()}")
         choice = input("Would you like to deposit, withdraw, or transfer?").upper()
-        savings = bankaccount.getSavings()
+
     elif type == "B":
         dualaccount = "A"
         while dualaccount != "C" and dualaccount != "S":

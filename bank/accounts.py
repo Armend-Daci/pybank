@@ -3,6 +3,12 @@ class Checking:
         self.balance = deposit
         self.isActive = True
 
+    def __str__(self):
+        if self.balance == ['NO_CHECKING\n']:
+            return "NO_CHECKING"
+        else:
+            return self.balance
+
     def deposit(self, deposit):
         self.balance += deposit
 
@@ -26,6 +32,11 @@ class Savings:
         self.balance = deposit
         self.isActive = True
 
+    def __str__(self):
+        if self.balance == ['NO_SAVINGS\n']:
+            return "NO_SAVINGS"
+        else:
+            return self.balance
     def deposit(self, deposit):
         self.balance += deposit
 
