@@ -22,8 +22,9 @@ def initialmenu():
         print(type(p))
         print(user['checking'].getBalance(), user['savings'].getBalance())
         print(p.split(" "), 'NO_SAVINGS')
-        print(b.data[num], user, type('NO_SAVINGS'))
-        if b.data[num] == user and p == "NO_CHECKING":
+        print("below")
+        print(b.data[num] == user, type('NO_SAVINGS'))
+        if b.data[num] == user and "NO_CHECKING" in str(user['checking']):
             accounttype = "S"
         elif b.data[num] == user and "NO_SAVINGS" in str(user['savings']): #'== "NO_SAVINGS":
             accounttype = "C"
