@@ -212,7 +212,7 @@ def viewer(user, num, type):
 
     elif type == "S":
         print(
-            f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Savings account #{list[num].getBank().getAccount()} is {list[num].getBank().getSavings().getBalance()}")
+            f"Hello {user['first_name']} {user['last_name']}, the balance for Savings account #{num} is {user['savings'].getBalance()}")
         choice = input("Would you like to deposit, withdraw, or transfer?").upper()
 
     elif type == "B":
