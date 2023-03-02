@@ -3,7 +3,7 @@ from bank.accounts import *
 
 def initialmenu():
     print("What would you like to do? 1- Log in. 2- Create a new account.")
-    decision = float(input(""))
+    decision = int(input(""))
 
     accounttype = "T"
 
@@ -97,11 +97,15 @@ def initialmenu():
             if accounttype == "C":
                 accountnum = accountcreator(b.data, accounttype)
 
-                check = Checking(deposit)
-                bank = Bank(accountnum, check, None)
-                customer = (fname, lname, pwd, bank)
 
-                list.append(customer)
+                b.data[accountnum] = {
+                        "first_name": fname,
+                        "last_name": lname,
+                        "password": pwd,
+                        "checking": deposit,
+                        "savings": "NO_SAVINGS"
+                    }
+                print(b.data)
                 print(
                     f"Success {fname} {lname} has created account number {accountnum} with a total balance of {deposit}!")
 
@@ -117,7 +121,7 @@ def initialmenu():
                 print(
                     f"Success {fname} {lname} has created account number {accountnum} with a total balance of {deposit}!")
 
-        """
+
         elif exists == "Y":
             num = -1
             accountnum = -1
@@ -135,7 +139,7 @@ def initialmenu():
                             deposit))
                 print(f"Success account#{list[num].getAccount()} now has a Savings Account with a balance of {deposit}")
                 print("Taking you to main menu...")
-                main()
+                #main()
             elif type == "S":
                 print("How much would you like to deposit into your new Checking Account?")
                 deposit = int(input())
@@ -144,12 +148,12 @@ def initialmenu():
                 print(
                     f"Success account#{list[num].getAccount()} now has a Checking Account with a balance of {deposit}")
                 print("Taking you to main menu...")
-                main()
+                #main()
             elif type == "B":
                 print("You already have two accounts!")
                 print("Taking you to main menu...")
-                main()
-                """
+                #main()
+            initialmenu()
 
 
 def accountcreator(list, accounttype):
