@@ -3,7 +3,7 @@ from bank.accounts import *
 
 def initialmenu():
     print("What would you like to do? 1- Log in. 2- Create a new account.")
-    decision = int(input(""))
+    decision = float(input(""))
 
     accounttype = "T"
 
@@ -12,7 +12,7 @@ def initialmenu():
         accountnum = -1
 
         while num == -1 and accountnum < 10000:
-            accountnum = int(input("What is your account number?"))
+            accountnum = float(input("What is your account number?"))
             pwd = input("What is your password?")
             num = login(b.data, accountnum, pwd)  # login function provides element in array of account
 
@@ -92,7 +92,7 @@ def initialmenu():
             deposit = -1
             while accounttype != "C" and accounttype != "S" and deposit < 0:
                 accounttype = (input("What type of account would you like to create C/S?")).upper()
-                deposit = int(input("How much would you like to deposit?"))
+                deposit = float(input("How much would you like to deposit?"))
 
             if accounttype == "C":
                 accountnum = accountcreator(b.data, accounttype)
@@ -218,7 +218,7 @@ def viewer(user, num, type):
     elif type == "B":
         dualaccount = "A"
         while dualaccount != "C" and dualaccount != "S":
-            print(f"Currently using Checking Account#{bankaccount.getAccount()}")
+            print(f"Currently using Checking Account#{num}")
             print("Would you like to switch to your Savings Account?(Y/N)")
             dualaccount = input().upper()
             if dualaccount == "Y":
@@ -228,14 +228,14 @@ def viewer(user, num, type):
 
         if dualaccount == "C":
             print(
-                f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Checking account #{list[num].getBank().getAccount()} is {list[num].getBank().getChecking().getBalance()}")
+                f"Hello {user['first_name']} {user['last_name']}, the balance for Checking account #{num} is {user['checking'].getBalance()}")
             choice = input("Would you like to deposit, withdraw, or transfer?").upper()
-            checking = bankaccount.getChecking()
+            checking = user['checking']
         elif dualaccount == "S":
             print(
                 f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Checking account #{list[num].getBank().getAccount()} is {list[num].getBank().getChecking().getBalance()}")
             choice = input("Would you like to deposit, withdraw, or transfer?").upper()
-            savings = bankaccount.getSavings()
+            savings = user['savings']
 
     print(choice)
     if choice == "D" and type == "C" or dualaccount == "C" and type == "B" and choice == "D":
@@ -258,26 +258,29 @@ def viewer(user, num, type):
         run = 0
         while run == 0 or amount - checking.getBalance() > -100:
             run += 1
-            amount = int(input())
+            amount = float(input())
             checking.withdraw(amount)
-            viewer(list, num, type)
+            viewer(user, num, type)
             # if list[num].getBalance() - amount < -100:
             #   print("Amount entered is too large! You do not have sufficient funds.")
     elif choice == "W" and type == "S" or dualaccount == "S":
         print("How much would you like to withdraw from your Savings Account?")
-        print(f"Current Balance: {savings.getBalance()}")
+        print(f"Current Balance: {user['savings'].getBalance()}")
         run = 0
         while run == 0 or amount - savings.getBalance() > -100:
             run += 1
-            amount = int(input())
-            savings.withdraw(amount)
-            viewer(list, num, type)
+            amount = float(input())
+            user['savings'].withdraw(amount)
+            viewer(user, num, type)
     newchoice = ""
     while newchoice != "Y" and newchoice != "N":
         print("Would you like to do anything else?")
         newchoice = input().upper()
     if newchoice == "N":
         return 0
+    elif newchoice == "Y":
+        initialmenu()
+
 
 
 if __name__ == '__main__':
