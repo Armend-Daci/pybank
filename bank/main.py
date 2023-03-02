@@ -96,8 +96,6 @@ def initialmenu():
 
             if accounttype == "C":
                 accountnum = accountcreator(b.data, accounttype)
-
-
                 b.data[accountnum] = {
                         "first_name": fname,
                         "last_name": lname,
@@ -105,21 +103,20 @@ def initialmenu():
                         "checking": deposit,
                         "savings": "NO_SAVINGS"
                     }
-                print(b.data)
                 print(
-                    f"Success {fname} {lname} has created account number {accountnum} with a total balance of {deposit}!")
-
+                    f"Success {fname} {lname} has created a new checking account number {accountnum} with a total balance of {deposit}!")
 
             elif accounttype == "S":
                 accountnum = accountcreator(b.data, accounttype)
-
-                savings = Savings(deposit)
-                bank = Bank(accountnum, None, savings)
-                customer = (fname, lname, pwd, bank)
-
-                list.append(customer)
+                b.data[accountnum] = {
+                    "first_name": fname,
+                    "last_name": lname,
+                    "password": pwd,
+                    "checking": "NO_CHECKING",
+                    "savings": deposit
+                }
                 print(
-                    f"Success {fname} {lname} has created account number {accountnum} with a total balance of {deposit}!")
+                    f"Success {fname} {lname} has created a new savings account number {accountnum} with a total balance of {deposit}!")
 
 
         elif exists == "Y":

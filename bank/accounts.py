@@ -45,6 +45,7 @@ class Savings:
             return "NO_SAVINGS"
         else:
             return str(self.balance)
+
     def deposit(self, deposit):
         self.balance += deposit
 
