@@ -28,6 +28,9 @@ class Checking:
             self.balance = self.balance - amount - 35
             print(f"You have withdrawn more than your current balance, so an overdraft fee of $35 has been applied.")
             print(f"New balance is: {self.balance}")
+            self.overdraft += 1
+            if self.overdraft == 2:
+                self.isActive = False
         elif self.balance - amount < -100:
             print(f"The amount you have selected is too big! Transaction Failed")
 
@@ -62,6 +65,9 @@ class Savings:
             self.balance = self.balance - amount - 35
             print(f"You have withdrawn more than your current balance, so an overdraft fee of $35 has been applied.")
             print(f"New balance is: {self.balance}")
+            self.overdraft += 1
+            if self.overdraft == 2:
+                self.isActive = False
         elif self.balance - amount < -100:
             print(f"The amount you have selected is too big! Transaction Failed")
 
