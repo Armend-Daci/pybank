@@ -18,12 +18,8 @@ def initialmenu():
 
         user = {}
         user = b.data[num]
-        p = str(user['savings'].getBalance())
-        print(type(p))
-        print(user['checking'].getBalance(), user['savings'].getBalance())
-        print(p.split(" "), 'NO_SAVINGS')
-        print("below")
-        print(b.data[num] == user, type('NO_SAVINGS'))
+
+
         if b.data[num] == user and "NO_CHECKING" in str(user['checking']):
             accounttype = "S"
         elif b.data[num] == user and "NO_SAVINGS" in str(user['savings']): #'== "NO_SAVINGS":
@@ -35,45 +31,7 @@ def initialmenu():
         input()
         #type = finder(list, num, accountnum)  # finder checks for if you have a C, S or B
         amount = 0
-        """
-        if list[num].isActive() is False and type == "C":
-            print(
-                f"Please add more money into Checking Account#{list[num].getAccount}, current balance: {list[num].getBalance()}")
-            while amount + list[num].getBalance() < 0:
-                amount = int(input())
-            list[num].Deposit(amount)
-            list[num].activate()
-            success(list[num])
-        elif list[num].isActive() is False and type == "S":
-            print(
-                f"Please add more money into Savings Account#{list[num].getAccount()}, current balance: {list[num].getBalance()}")
-            while amount + list[num].getBalance() < 0:
-                amount = int(input())
-            list[num].Deposit(amount)
-            list[num].activate()
-            success(list[num])
-        elif list[num].isActive() is False and type == "B" and list[num].accountType() == "C":
-            print(
-                f"Please add more money into Checking Account#{list[num].getAccount()}, current balance: {list[num].getBalance()}")
-            # print(amount, type(list[num].getBalance()))
-            while amount + list[num].getBalance() < 0:
-                print(f"Please enter a number greater than {list[num].getBalance()}")
-                amount = int(input())
-            list[num].Deposit(amount)
-            list[num].activate()
-            success(list[num])
-        elif list[num].isActive() is False and type == "B" and list[num].accountType() == "S":
-            print(
-                f"Please add more money into Savings Account#{list[num].getAccount()}, current balance: {list[num].getBalance()}")
-            # print(amount, type(list[num].getBalance()))
-            while amount + list[num].getBalance() < 0:
-                print(f"Please enter a number greater than {list[num].getBalance()}")
-                amount = int(input())
-            list[num].Deposit(amount)
-            list[num].activate()
-            success(list[num])
-            # print(f"Please add more money into Savings Account#{list[num].getAccount()}")
-        """
+
         print(accounttype)
         if accounttype == "B":
             viewer(user, num, accounttype)
@@ -206,12 +164,22 @@ def finder(list, num, accountnum):
 def viewer(user, num, type):
     dualaccount = ""
     print(type)
+
     if type == "C":
+        if user['checking'].isActive == False:
+            print(f"Your account is currently disabled, please deposit a minimum of ${user['checking'].getBalance()} to reactivate your account.")
+            while user['checking'].getBalance() < 0:
+                reactivateamount = input(f"Please enter the amount you would like to deposit: (Must be greater than {user['checking'].getBalance()}")
+                if reactivateamount >= user['checking'].getBalance():
+                    user['checking'].Deposit(reactivateamount)
+
         print(
             f"Hello {user['first_name']} {user['last_name']}, the balance for Checking account #{num} is {user['checking'].getBalance()}")
         choice = input("Would you like to deposit, withdraw, or transfer?").upper()
 
     elif type == "S":
+        if user['savings'].isActive == False:
+            pass
         print(
             f"Hello {user['first_name']} {user['last_name']}, the balance for Savings account #{num} is {user['savings'].getBalance()}")
         choice = input("Would you like to deposit, withdraw, or transfer?").upper()
