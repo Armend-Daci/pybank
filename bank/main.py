@@ -171,7 +171,10 @@ def viewer(user, num, type):
             while user['checking'].getBalance() < 0:
                 reactivateamount = input(f"Please enter the amount you would like to deposit: (Must be greater than {user['checking'].getBalance()}")
                 if reactivateamount >= user['checking'].getBalance():
-                    user['checking'].Deposit(reactivateamount)
+                    user['checking'].deposit(reactivateamount)
+                else:
+                    pass
+                print("Success, your account has been reactivated!")
 
         print(
             f"Hello {user['first_name']} {user['last_name']}, the balance for Checking account #{num} is {user['checking'].getBalance()}")
