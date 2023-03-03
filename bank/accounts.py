@@ -5,6 +5,7 @@ class Checking:
             print(deposit)
             deposit = float(deposit)
         self.balance = deposit
+        self.overdraft = 0
         self.isActive = True
 
     def __str__(self):
@@ -38,6 +39,7 @@ class Savings:
             print(deposit)
             deposit = float(deposit)
         self.balance = deposit
+        self.overdraft = 0
         self.isActive = True
 
     def __str__(self):
