@@ -9,8 +9,8 @@ class Checking:
         self.isActive = True
 
     def __str__(self):
-        if self.balance == ['NO_CHECKING\n']:
-            return "NO_CHECKING"
+        if self.balance == 'NO_CHECKING':
+            return str("NO_CHECKING")
         else:
             return str(self.balance)
 
@@ -49,8 +49,9 @@ class Savings:
         self.isActive = True
 
     def __str__(self):
+        print(self.balance, ['NO_SAVINGS\n'])
         if self.balance == ['NO_SAVINGS\n']:
-            return "NO_SAVINGS"
+            return str("NO_SAVINGS")
         else:
             return str(self.balance)
 

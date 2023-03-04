@@ -275,7 +275,41 @@ def viewer(user, num, type):
             amount = float(input())
             user['savings'].withdraw(amount)
             viewer(user, num, type)
-    elif choice == "T" and type == "S":
+    elif choice == "T" and type == "C" or dualaccount == "C" and choice == "T":
+        if type == "B":
+            print("Would you like to transfer to your Savings Account?")
+        else:
+            print("What is the account number you would like to transfer money to?")
+            target = int(input("Account#"))
+
+            accounttype = ""
+            print(b.data[target]['checking'].getBalance())# == "NO_CHECKING")
+            if b.data[target]['checking'] == "NO_CHECKING":
+                accounttype = 'savings'
+            elif b.data[target]['savings'] == "NO_SAVINGS":
+                accounttype = 'checking'
+            else:
+                print("Would you like to transfer to the users Checking or Savings Account? (C/S)")
+                temp = input().upper()
+                if temp == "C":
+                    accounttype = 'checking'
+                elif temp == "S":
+                    accounttype = 'savings'
+
+            if target in b.data and target != num and b.data[target]['checking'] != "NO_CHECKING":
+                print(f"How much would you like to transfer to Account#{target}?")
+                targetamount = float(input())
+                if targetamount > user['checking'].getBalance():
+                    print("The amount you have entered is greater than what you currently have!")
+                    print("Transaction did not occur!")
+                else:
+                    user['checking'].withdraw(targetamount)
+                    b.data[target][accounttype].deposit(targetamount)
+                    print(f"You have successfully transferred ${targetamount} from Account#{num} to Account#{target}")
+
+            else:
+                print("Incorrect account number, please try again!")
+    elif choice == "T" and type == "S" or dualaccount == "S" and choice == "T":
         pass
     newchoice = ""
     while newchoice != "Y" and newchoice != "N":
