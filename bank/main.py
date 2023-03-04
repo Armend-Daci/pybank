@@ -283,7 +283,7 @@ def viewer(user, num, type):
             target = int(input("Account#"))
 
             accounttype = ""
-            print(b.data[target]['checking'].getBalance())# == "NO_CHECKING")
+            print(b.data[target]['savings'].getBalance())# == "NO_CHECKING")
             if b.data[target]['checking'] == "NO_CHECKING":
                 accounttype = 'savings'
             elif b.data[target]['savings'] == "NO_SAVINGS":

@@ -49,8 +49,7 @@ class Savings:
         self.isActive = True
 
     def __str__(self):
-        print(self.balance, ['NO_SAVINGS\n'])
-        if self.balance == ['NO_SAVINGS\n']:
+        if self.balance == 'NO_SAVINGS':
             return str("NO_SAVINGS")
         else:
             return str(self.balance)
