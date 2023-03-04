@@ -56,6 +56,9 @@ class Savings:
 
     def deposit(self, deposit):
         self.balance += deposit
+        if self.isActive == False:
+            self.isActive == True
+            self.overdraft = 0
 
     def getBalance(self):
         return self.balance
