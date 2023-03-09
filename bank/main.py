@@ -281,6 +281,8 @@ def viewer(user, num, type):
             transferself = input().upper()
             if transferself == "Y":
                 print("How much would you like to transfer from your Checking Account to your Savings Account?")
+                print(f"Checking Account: ${user['checking'].getBalance()}")
+                print(f"Savings Account: ${user['savings'].getBalance()}")
                 amount = float(input())
                 if amount <= user['checking'].getBalance():
                     user['checking'].withdraw(amount)
@@ -288,7 +290,7 @@ def viewer(user, num, type):
                     print(f"${amount} has been successfully transfered from your Checking Account to your Savings Account!")
                 else:
                     print("Amount input is invalid! Please try again.")
-        else:
+        if type != "B" or transferself == "N":
             print("What is the account number you would like to transfer money to?")
             target = int(input("Account#"))
 
