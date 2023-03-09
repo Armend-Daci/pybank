@@ -277,13 +277,23 @@ def viewer(user, num, type):
             viewer(user, num, type)
     elif choice == "T" and type == "C" or dualaccount == "C" and choice == "T":
         if type == "B":
-            print("Would you like to transfer to your Savings Account?")
+            print("Would you like to transfer to your Savings Account? Y/N")
+            transferself = input().upper()
+            if transferself == "Y":
+                print("How much would you like to transfer from your Checking Account to your Savings Account?")
+                amount = float(input())
+                if amount <= user['checking'].getBalance():
+                    user['checking'].withdraw(amount)
+                    user['savings'].deposit(amount)
+                    print(f"${amount} has been successfully transfered from your Checking Account to your Savings Account!")
+                else:
+                    print("Amount input is invalid! Please try again.")
         else:
             print("What is the account number you would like to transfer money to?")
             target = int(input("Account#"))
 
             accounttype = ""
-            print(b.data[target]['savings'].getBalance())# == "NO_CHECKING")
+            print(isinstance(b.data[target]['savings'].getBalance(), str))# == "NO_CHECKING")
             if b.data[target]['checking'] == "NO_CHECKING":
                 accounttype = 'savings'
             elif b.data[target]['savings'] == "NO_SAVINGS":
