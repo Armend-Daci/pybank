@@ -248,6 +248,7 @@ def viewer(user, num, type):
         amount = float(input())
         checking.deposit(amount)
         print(checking.getBalance())
+        b.data[num]['checking'] = user['checking']
     elif choice == "D" and type == "S" or dualaccount == "S" and type == "B" and choice == "D":
         print(choice,type,dualaccount,type)
         savings = user['savings']
@@ -256,6 +257,7 @@ def viewer(user, num, type):
         amount = float(input())
         savings.deposit(amount)
         print(savings.getBalance())
+        b.data[num]['savings'] = user['savings']
     elif choice == "W" and type == "C" or dualaccount == "C" and type == "B" and choice == "W":
         print("How much would you like to withdraw from your Checking Account?")
         print(f"Current Balance: {checking.getBalance()}")
