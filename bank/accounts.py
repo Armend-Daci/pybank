@@ -150,6 +150,13 @@ class TransactionView:
         pass
 
     def addDeposit(self):
+        pass
+
+    def addWithdraw(self):
+        pass
+
+    def addTransfer(self):
+        pass
 
 """
     accountnum: {
