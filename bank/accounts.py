@@ -145,12 +145,33 @@ class CustomerAccount:
     def getBank(self):
         return self.bank
 
-class TransactionView:
-    def __init__(self):
-        pass
 
-    def addDeposit(self):
-        pass
+class TransactionView:
+
+    def __init__(self):
+        self.transactions = {}
+
+    def addDeposit(self, num, amount):
+        print(type(self.transactions))
+        if self.transactions == {}:
+            self.transactions = {
+                    num: [{
+                    'transaction_type': "D",
+                    'amount': amount,
+                    'time': "time"
+                }]
+            }
+            print("True")
+        else:
+            self.transactions[num].append(
+                {
+                    'transaction_type': "D",
+                    'amount': amount,
+                    'time': "time"
+                }
+            )
+        print(self.transactions, "Done")
+
 
     def addWithdraw(self):
         pass

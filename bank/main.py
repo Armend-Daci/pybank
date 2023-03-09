@@ -402,7 +402,10 @@ if __name__ == '__main__':
         ],
     }
     print(testtransaction[10000][2])
-    input()
     b = Bank()
+    t = TransactionView()
+    t.addDeposit(10008, 200)
+    t.addDeposit(10008, 450)
+    input()
     initialmenu()
 

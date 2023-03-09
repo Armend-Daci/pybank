@@ -1,0 +1,20 @@
+    transaction = {
+        10000: [
+            {
+                'transaction_type': "D",
+                'amount': 400,
+                'time': "time"
+            },
+            {
+                'transaction_type': "W",
+                'amount': 400,
+                'time': "time"
+            },
+            {
+                'transaction_type': "T",
+                'amount': 400,
+                'time': "time",
+                'targetaccount': "target"
+            }
+        ],
+    }
