@@ -381,6 +381,28 @@ def viewer(user, num, type):
 
 
 if __name__ == '__main__':
+    testtransaction = {
+        10000: [
+            {
+                'transaction': "D",
+                'amount': 400,
+                'time': "time"
+            },
+            {
+                'transaction': "W",
+                'amount': 400,
+                'time': "time"
+            },
+            {
+                'transaction': "T",
+                'amount': 400,
+                'time': "time",
+                'targetaccount': "target"
+            }
+        ],
+    }
+    print(testtransaction[10000][2])
+    input()
     b = Bank()
     initialmenu()
 

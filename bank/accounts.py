@@ -146,11 +146,15 @@ class CustomerAccount:
         return self.bank
 
 class TransactionView:
-    pass
+    def __init__(self):
+        pass
+
+    def addDeposit(self):
 
 """
     accountnum: {
         transactiontype: D
-        
+        time: time
+        amount: amount
     }
 """
