@@ -406,6 +406,8 @@ if __name__ == '__main__':
     t = TransactionView()
     t.addDeposit(10008, 200)
     t.addDeposit(10008, 450)
+    t.addWithdraw(10008, 100)
+    print(t.transactions)
     input()
     initialmenu()
 

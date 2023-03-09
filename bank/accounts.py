@@ -152,7 +152,6 @@ class TransactionView:
         self.transactions = {}
 
     def addDeposit(self, num, amount):
-        print(type(self.transactions))
         if self.transactions == {}:
             self.transactions = {
                     num: [{
@@ -173,8 +172,24 @@ class TransactionView:
         print(self.transactions, "Done")
 
 
-    def addWithdraw(self):
-        pass
+    def addWithdraw(self, num, amount):
+        if self.transactions == {}:
+            self.transactions = {
+                    num: [{
+                    'transaction_type': "W",
+                    'amount': amount,
+                    'time': "time"
+                }]
+            }
+            print("True")
+        else:
+            self.transactions[num].append(
+                {
+                    'transaction_type': "W",
+                    'amount': amount,
+                    'time': "time"
+                }
+            )
 
     def addTransfer(self):
         pass
