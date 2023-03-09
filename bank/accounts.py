@@ -191,8 +191,26 @@ class TransactionView:
                 }
             )
 
-    def addTransfer(self):
-        pass
+    def addTransfer(self, num, amount):
+        if self.transactions == {}:
+            self.transactions = {
+                num: [{
+                    'transaction_type': "T",
+                    'amount': amount,
+                    'time': "time",
+                    'targetaccount': "target"
+                }]
+            }
+            print("True")
+        else:
+            self.transactions[num].append(
+                {
+                    'transaction_type': "T",
+                    'amount': amount,
+                    'time': "time",
+                    'targetaccount': "target"
+                }
+            )
 
 """
     accountnum: {

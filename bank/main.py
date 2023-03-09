@@ -407,6 +407,7 @@ if __name__ == '__main__':
     t.addDeposit(10008, 200)
     t.addDeposit(10008, 450)
     t.addWithdraw(10008, 100)
+    t.addTransfer(10008, 400)
     print(t.transactions)
     input()
     initialmenu()
