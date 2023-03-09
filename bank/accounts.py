@@ -147,3 +147,10 @@ class CustomerAccount:
 
 class TransactionView:
     pass
+
+"""
+    accountnum: {
+        transactiontype: D
+        
+    }
+"""

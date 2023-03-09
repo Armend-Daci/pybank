@@ -260,9 +260,9 @@ def viewer(user, num, type):
         b.data[num]['savings'] = user['savings']
     elif choice == "W" and type == "C" or dualaccount == "C" and type == "B" and choice == "W":
         print("How much would you like to withdraw from your Checking Account?")
-        print(f"Current Balance: {checking.getBalance()}")
+        print(f"Current Balance: {user['checking'].getBalance()}")
         run = 0
-        while run == 0 or amount - checking.getBalance() > -100:
+        while run == 0 or amount - user['checking'].getBalance() > -100:
             run += 1
             amount = float(input())
             checking.withdraw(amount)
