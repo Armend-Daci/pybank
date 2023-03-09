@@ -144,3 +144,6 @@ class CustomerAccount:
 
     def getBank(self):
         return self.bank
+
+class TransactionView:
+    pass
