@@ -236,7 +236,7 @@ def viewer(user, num, type):
                     print("Success, your account has been reactivated!")
 
             print(
-                f"Hello {list[num].getFName()} {list[num].getLName()}, the balance for Checking account #{list[num].getBank().getAccount()} is {list[num].getBank().getChecking().getBalance()}")
+                f"Hello {user['first_name']} {user['last_name']}, the balance for Savings account #{num} is {user['savings'].getBalance()}")
             choice = input("Would you like to deposit, withdraw, or transfer?").upper()
             savings = user['savings']
 
@@ -248,7 +248,8 @@ def viewer(user, num, type):
         amount = float(input())
         checking.deposit(amount)
         print(checking.getBalance())
-    elif choice == "D" and type == "S" or dualaccount == "S" and type == "B":
+    elif choice == "D" and type == "S" or dualaccount == "S" and type == "B" and choice == "D":
+        print(choice,type,dualaccount,type)
         savings = user['savings']
         print("How much would you like to deposit in your Savings Account?")
         print(f"Current Balance: {savings}")
@@ -266,7 +267,7 @@ def viewer(user, num, type):
             viewer(user, num, type)
             # if list[num].getBalance() - amount < -100:
             #   print("Amount entered is too large! You do not have sufficient funds.")
-    elif choice == "W" and type == "S" or dualaccount == "S":
+    elif choice == "W" and type == "S" or dualaccount == "S" and type == "B" and choice == "W":
         print("How much would you like to withdraw from your Savings Account?")
         print(f"Current Balance: {user['savings'].getBalance()}")
         run = 0
@@ -287,7 +288,7 @@ def viewer(user, num, type):
                 if amount <= user['checking'].getBalance():
                     user['checking'].withdraw(amount)
                     user['savings'].deposit(amount)
-                    print(f"${amount} has been successfully transfered from your Checking Account to your Savings Account!")
+                    print(f"${amount} has been successfully transferred from your Checking Account to your Savings Account!")
                 else:
                     print("Amount input is invalid! Please try again.")
         if type != "B" or transferself == "N":
@@ -295,10 +296,9 @@ def viewer(user, num, type):
             target = int(input("Account#"))
 
             accounttype = ""
-            print(isinstance(b.data[target]['savings'].getBalance(), str))# == "NO_CHECKING")
-            if b.data[target]['checking'] == "NO_CHECKING":
+            if isinstance(b.data[target]['checking'].getBalance(), str):
                 accounttype = 'savings'
-            elif b.data[target]['savings'] == "NO_SAVINGS":
+            elif isinstance(b.data[target]['savings'].getBalance(), str):
                 accounttype = 'checking'
             else:
                 print("Would you like to transfer to the users Checking or Savings Account? (C/S)")
@@ -322,7 +322,51 @@ def viewer(user, num, type):
             else:
                 print("Incorrect account number, please try again!")
     elif choice == "T" and type == "S" or dualaccount == "S" and choice == "T":
-        pass
+        if type == "B":
+            print("Would you like to transfer to your Checking Account? Y/N")
+            transferself = input().upper()
+            if transferself == "Y":
+                print("How much would you like to transfer from your Savings Account to your Checking Account?")
+                print(f"Savings Account: ${user['savings'].getBalance()}")
+                print(f"Checking Account: ${user['checking'].getBalance()}")
+                amount = float(input())
+                if amount <= user['savings'].getBalance():
+                    user['savings'].withdraw(amount)
+                    user['checking'].deposit(amount)
+                    print(
+                        f"${amount} has been successfully transferred from your Checking Account to your Savings Account!")
+                else:
+                    print("Amount input is invalid! Please try again.")
+        if type != "B" or transferself == "N":
+            print("What is the account number you would like to transfer money to?")
+            target = int(input("Account#"))
+
+            accounttype = ""
+            if isinstance(b.data[target]['checking'].getBalance(), str):
+                accounttype = 'savings'
+            elif isinstance(b.data[target]['savings'].getBalance(), str):
+                accounttype = 'checking'
+            else:
+                print("Would you like to transfer to the users Checking or Savings Account? (C/S)")
+                temp = input().upper()
+                if temp == "C":
+                    accounttype = 'checking'
+                elif temp == "S":
+                    accounttype = 'savings'
+
+            if target in b.data and target != num and b.data[target]['checking'] != "NO_CHECKING":
+                print(f"How much would you like to transfer to Account#{target}?")
+                targetamount = float(input())
+                if targetamount > user['savings'].getBalance():
+                    print("The amount you have entered is greater than what you currently have!")
+                    print("Transaction did not occur!")
+                else:
+                    user['savings'].withdraw(targetamount)
+                    b.data[target][accounttype].deposit(targetamount)
+                    print(f"You have successfully transferred ${targetamount} from Account#{num} to Account#{target}")
+
+            else:
+                print("Incorrect account number, please try again!")
     newchoice = ""
     while newchoice != "Y" and newchoice != "N":
         print("Would you like to do anything else?")
