@@ -1,4 +1,6 @@
 from bank.accounts import *
+from datetime import datetime
+import time
 
 
 def initialmenu():
@@ -409,6 +411,12 @@ if __name__ == '__main__':
     t.addWithdraw(10008, 100, b)
     t.addTransfer(10008, 400, 10006, b, "checking", "savings")
     print(t.transactions, 1)
+
+    """
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    print("Current Time =", current_time)"""
+
     input()
     initialmenu()
 

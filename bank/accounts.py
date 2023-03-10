@@ -1,3 +1,6 @@
+import time
+from datetime import datetime
+
 class Checking:
     def __init__(self, deposit):
         self.balance = float(0)
@@ -151,13 +154,19 @@ class TransactionView:
     def __init__(self):
         self.transactions = {}
 
+    def gettime(self):
+        now = datetime.now()
+        current_time = now.strftime("%I:%M:%S %p %a, %b %d, %Y")
+        print(current_time)
+        return current_time
+
     def addDeposit(self, num, amount, b):
         if self.transactions == {}:
             self.transactions = {
                     num: [{
                     'transaction_type': "D",
                     'amount': amount,
-                    'time': "time"
+                    'time': self.gettime()
                 }]
             }
             print("True")
@@ -166,7 +175,7 @@ class TransactionView:
                 {
                     'transaction_type': "D",
                     'amount': amount,
-                    'time': "time"
+                    'time': self.gettime()
                 }
             )
         print(self.transactions, "Done")
@@ -178,7 +187,7 @@ class TransactionView:
                     num: [{
                     'transaction_type': "W",
                     'amount': amount,
-                    'time': "time"
+                    'time': self.gettime()
                 }]
             }
             print("True")
@@ -187,7 +196,7 @@ class TransactionView:
                 {
                     'transaction_type': "W",
                     'amount': amount,
-                    'time': "time"
+                    'time': self.gettime()
                 }
             )
 
@@ -197,7 +206,7 @@ class TransactionView:
                 num: [{
                     'transaction_type': "T-",
                     'amount': amount,
-                    'time': "time",
+                    'time': self.gettime(),
                     'targetaccount': targetaccount,
                     'balance': b.data[num][type1].getBalance()
                 }]
@@ -206,7 +215,7 @@ class TransactionView:
                 num: [{
                     'transaction_type': "T+",
                     'amount': amount,
-                    'time': "time",
+                    'time': self.gettime(),
                     'sourceaccount': num,
                     'balance': b.data[targetaccount][type2].getBalance()
                 }]
@@ -219,7 +228,7 @@ class TransactionView:
                     {
                         'transaction_type': "T-",
                         'amount': amount,
-                        'time': "time",
+                        'time': self.gettime(),
                         'targetaccount': targetaccount,
                         'balance': b.data[num][type1].getBalance()
                     }
@@ -228,7 +237,7 @@ class TransactionView:
                     {
                         'transaction_type': "T+",
                         'amount': amount,
-                        'time': "time",
+                        'time': self.gettime(),
                         'sourceaccount': num,
                         'balance': b.data[targetaccount][type2].getBalance()
                     }
@@ -238,7 +247,7 @@ class TransactionView:
                     {
                         'transaction_type': "T-",
                         'amount': amount,
-                        'time': "time",
+                        'time': self.gettime(),
                         'targetaccount': targetaccount,
                         'balance': b.data[num][type1].getBalance()
                     }
@@ -247,7 +256,7 @@ class TransactionView:
                     {
                         'transaction_type': "T+",
                         'amount': amount,
-                        'time': "time",
+                        'time': self.gettime(),
                         'sourceaccount': num,
                         'balance': b.data[targetaccount][type2].getBalance()
                     }
@@ -256,7 +265,7 @@ class TransactionView:
                     {
                         'transaction_type': "T-",
                         'amount': amount,
-                        'time': "time",
+                        'time': self.gettime(),
                         'targetaccount': targetaccount,
                         'balance': b.data[num][type1].getBalance()
                     }
@@ -264,7 +273,7 @@ class TransactionView:
                     {
                         'transaction_type': "T+",
                         'amount': amount,
-                        'time': "time",
+                        'time': self.gettime(),
                         'sourceaccount': num,
                         'balance': b.data[targetaccount][type2].getBalance()
                     }
@@ -274,7 +283,7 @@ class TransactionView:
                     {
                         'transaction_type': "T-",
                         'amount': amount,
-                        'time': "time",
+                        'time': self.gettime(),
                         'targetaccount': targetaccount,
                         'balance': b.data[num][type1].getBalance()
                     }
@@ -282,7 +291,7 @@ class TransactionView:
                     {
                         'transaction_type': "T+",
                         'amount': amount,
-                        'time': "time",
+                        'time': self.gettime(),
                         'sourceaccount': num,
                         'balance': b.data[targetaccount][type2].getBalance()
                     }
