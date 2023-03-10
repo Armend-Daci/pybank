@@ -161,37 +161,72 @@ class TransactionView:
         return current_time
 
     def addDeposit(self, num, amount, b):
-        if self.transactions == {}:
-            self.transactions = {
-                    num: [{
+        if num not in self.transactions:
+            self.transactions[num] = \
+                {
                     'transaction_type': "D",
                     'amount': amount,
                     'time': self.gettime()
-                }]
-            }
+                }
             print("True")
         else:
+            temp = {
+                num:
+                    [self.transactions[num],
+                    {
+                    'transaction_type': "D",
+                    'amount': amount,
+                    'time': self.gettime()
+                    }]
+                }
+            self.transactions.update(temp)
+            """
             self.transactions[num].append(
                 {
                     'transaction_type': "D",
                     'amount': amount,
                     'time': self.gettime()
                 }
-            )
+            )"""
         print(self.transactions, "Done")
 
-
     def addWithdraw(self, num, amount, b):
-        if self.transactions == {}:
-            self.transactions = {
-                    num: [{
+        if num not in self.transactions:
+            self.transactions[num] = \
+                {
                     'transaction_type': "W",
                     'amount': amount,
                     'time': self.gettime()
-                }]
+                }
+        elif num in self.transactions:
+            temp = {
+                num: [self.transactions[num],
+                    {
+                        'transaction_type': "W",
+                        'amount': amount,
+                        'time': self.gettime()
+                    }
+                ]
+            }
+            self.transactions.update(temp)
+        """
+        if num not in self.transactions:
+            self.transactions[num] = \
+            {
+                    'transaction_type': "W",
+                    'amount': amount,
+                    'time': self.gettime()
             }
             print("True")
         else:
+            print(3)
+            self.transactions[num] = \
+                {
+                    'transaction_type': "W",
+                    'amount': amount,
+                    'time': self.gettime()
+                }
+        
             self.transactions[num].append(
                 {
                     'transaction_type': "W",
@@ -199,7 +234,7 @@ class TransactionView:
                     'time': self.gettime()
                 }
             )
-
+            """
     def addTransfer(self, num, amount, targetaccount, b, type1, type2):
         if self.transactions == {}:
             self.transactions = {

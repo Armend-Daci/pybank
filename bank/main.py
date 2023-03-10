@@ -407,9 +407,9 @@ if __name__ == '__main__':
     b = Bank()
     t = TransactionView()
     t.addDeposit(10008, 200, b)
-    t.addDeposit(10008, 450, b)
+    t.addDeposit(10001, 450, b)
     t.addWithdraw(10008, 100, b)
-    t.addTransfer(10008, 400, 10006, b, "checking", "savings")
+    #t.addTransfer(10008, 400, 10006, b, "checking", "savings")
     print(t.transactions, 1)
 
     """
