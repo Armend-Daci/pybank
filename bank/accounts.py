@@ -161,62 +161,68 @@ class TransactionView:
         return current_time
 
     def addDeposit(self, num, amount, b):
-        print(100)
         if num not in self.transactions:
+            print("Updating... from Deposit")
             temp = {
-            num: {
+                num: {
                     'transaction_type': "D",
                     'amount': amount,
                     'time': self.gettime()
                 }
             }
             self.transactions.update(temp)
+        elif num in self.transactions:
+            print("Appending... from Deposit")
             """
-            self.transactions[num] = {
-                    'transaction_type': "D",
-                    'amount': amount,
-                    'time': self.gettime()
-                }"""
-            print("True", num)
-        else:
             temp = {
-                num: [self.transactions[num],
-                         {
-                            'transaction_type': "D",
-                            'amount': amount,
-                            'time': self.gettime()
-                         }
-                     ]
-                }
-            self.transactions.update(temp)
-            """
-            self.transactions[num].append(
-                {
+                'transaction_type': "D",
+                'amount': amount,
+                'time': self.gettime()
+            }
+            self.transactions[num].append(temp)"""
+
+            first = {
                     'transaction_type': "D",
                     'amount': amount,
                     'time': self.gettime()
                 }
-            )"""
-        print(self.transactions, "Done")
+            list1 = []
+
+            for i in self.transactions[num]:
+                list1.append(i)
+
+            if 'transaction_type' in list1:
+                list1.remove("transaction_type")
+                list1.remove("amount")
+                list1.remove("time")
+            list1.append(first)
+
+            print(123, list1)
+            temp = {
+                num: list1
+            }
+            print()
+            print(list1)
+            self.transactions.update(temp)
 
     def addWithdraw(self, num, amount, b):
+        print(num,self.transactions.keys())
         if num not in self.transactions:
-            self.transactions[num] = {
+            temp = {
+                num: {
                     'transaction_type': "W",
                     'amount': amount,
                     'time': self.gettime()
                 }
-        elif num in self.transactions:
-            temp = {
-                num: [self.transactions[num],
-                    {
-                        'transaction_type': "W",
-                        'amount': amount,
-                        'time': self.gettime()
-                    }
-                ]
             }
             self.transactions.update(temp)
+        elif num in self.transactions:
+            temp = {
+                'transaction_type': "W",
+                'amount': amount,
+                'time': self.gettime()
+            }
+            self.transactions[num].append(temp)
 
     def addTransfer(self, num, amount, targetaccount, b, type1, type2):
         if num in self.transactions and targetaccount in self.transactions:

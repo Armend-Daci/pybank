@@ -430,8 +430,14 @@ if __name__ == '__main__':
 
     t.addDeposit(10008, 200, b)
     t.addDeposit(10001, 450, b)
-    t.addWithdraw(10008, 100, b)
-    t.addTransfer(10008, 400, 10006, b, "checking", "savings")
+    t.addDeposit(10008, 200, b)
+    #t.addWithdraw(10008, 300, b)
+
+    t.addDeposit(10008, 20000, b)
+    t.addDeposit(10008, 530.40, b)
+    t.addDeposit(10008, 4058.34, b)
+    #t.addTransfer(10008, 400, 10006, b, "checking", "savings")
+
     print(t.transactions, 1)
 
     """
