@@ -383,6 +383,27 @@ def viewer(user, num, type):
 
 
 if __name__ == '__main__':
+    tempdict= {}
+    temp1 = {
+        1000: {
+            "t": 100
+        }
+    }
+    tempdict.update(temp1)
+    temp2 = {
+        1000: [tempdict[1000],
+        {
+            "t": 300
+        }]
+    }
+    #tempdict[1000].append(temp)
+    tempdict.update(temp2)
+    print(tempdict)
+
+
+    input()
+
+
     testtransaction = {
         10000: [
             {
@@ -406,10 +427,11 @@ if __name__ == '__main__':
     print(testtransaction[10000][2])
     b = Bank()
     t = TransactionView()
+
     t.addDeposit(10008, 200, b)
     t.addDeposit(10001, 450, b)
     t.addWithdraw(10008, 100, b)
-    #t.addTransfer(10008, 400, 10006, b, "checking", "savings")
+    t.addTransfer(10008, 400, 10006, b, "checking", "savings")
     print(t.transactions, 1)
 
     """

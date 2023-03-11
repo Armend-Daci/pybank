@@ -161,23 +161,32 @@ class TransactionView:
         return current_time
 
     def addDeposit(self, num, amount, b):
+        print(100)
         if num not in self.transactions:
-            self.transactions[num] = \
-                {
+            temp = {
+            num: {
                     'transaction_type': "D",
                     'amount': amount,
                     'time': self.gettime()
                 }
-            print("True")
-        else:
-            temp = {
-                num:
-                    [self.transactions[num],
-                    {
+            }
+            self.transactions.update(temp)
+            """
+            self.transactions[num] = {
                     'transaction_type': "D",
                     'amount': amount,
                     'time': self.gettime()
-                    }]
+                }"""
+            print("True", num)
+        else:
+            temp = {
+                num: [self.transactions[num],
+                         {
+                            'transaction_type': "D",
+                            'amount': amount,
+                            'time': self.gettime()
+                         }
+                     ]
                 }
             self.transactions.update(temp)
             """
@@ -192,8 +201,7 @@ class TransactionView:
 
     def addWithdraw(self, num, amount, b):
         if num not in self.transactions:
-            self.transactions[num] = \
-                {
+            self.transactions[num] = {
                     'transaction_type': "W",
                     'amount': amount,
                     'time': self.gettime()
@@ -209,34 +217,184 @@ class TransactionView:
                 ]
             }
             self.transactions.update(temp)
-        """
-        if num not in self.transactions:
-            self.transactions[num] = \
-            {
-                    'transaction_type': "W",
-                    'amount': amount,
-                    'time': self.gettime()
-            }
-            print("True")
-        else:
-            print(3)
-            self.transactions[num] = \
-                {
-                    'transaction_type': "W",
-                    'amount': amount,
-                    'time': self.gettime()
-                }
-        
-            self.transactions[num].append(
-                {
-                    'transaction_type': "W",
-                    'amount': amount,
-                    'time': self.gettime()
-                }
-            )
-            """
+
     def addTransfer(self, num, amount, targetaccount, b, type1, type2):
-        if self.transactions == {}:
+        if num in self.transactions and targetaccount in self.transactions:
+            temp = {
+                'transaction_type': "T-",
+                'amount': amount,
+                'time': self.gettime(),
+                'targetaccount': targetaccount,
+                'balance': b.data[num][type1].getBalance()
+            }
+            self.transactions[num].append(temp)
+            temp = {
+                'transaction_type': "T+",
+                'amount': amount,
+                'time': self.gettime(),
+                'sourceaccount': num,
+                'balance': b.data[targetaccount][type2].getBalance()
+            }
+            self.transactions[targetaccount].append(temp)
+        elif num not in self.transactions and targetaccount in self.transactions:
+            temp = { num: {
+                    'transaction_type': "T-",
+                    'amount': amount,
+                    'time': self.gettime(),
+                    'targetaccount': targetaccount,
+                    'balance': b.data[num][type1].getBalance()
+                }
+            }
+            self.transactions.append(temp)
+
+            temp = {
+                'transaction_type': "T+",
+                'amount': amount,
+                'time': self.gettime(),
+                'sourceaccount': num,
+                'balance': b.data[targetaccount][type2].getBalance()
+            }
+            self.transactions[targetaccount].append(temp)
+        elif num in self.transactions and targetaccount not in self.transactions:
+            temp = {
+                'transaction_type': "T-",
+                'amount': amount,
+                'time': self.gettime(),
+                'targetaccount': targetaccount,
+                'balance': b.data[num][type1].getBalance()
+            }
+            self.transactions[num].append(temp)
+            temp = { targetaccount: {
+                    'transaction_type': "T+",
+                    'amount': amount,
+                    'time': self.gettime(),
+                    'sourceaccount': num,
+                    'balance': b.data[targetaccount][type2].getBalance()
+            }
+            }
+            self.transactions.update(temp)
+        else:
+            temp = { num: {
+                'transaction_type': "T-",
+                'amount': amount,
+                'time': self.gettime(),
+                'targetaccount': targetaccount,
+                'balance': b.data[num][type1].getBalance()
+                }
+            }
+            self.transactions.update(temp)
+            temp = { targetaccount: {
+                'transaction_type': "T+",
+                'amount': amount,
+                'time': self.gettime(),
+                'sourceaccount': num,
+                'balance': b.data[targetaccount][type2].getBalance()
+            }
+            }
+            self.transactions.append(temp)
+        """
+        if num in self.transactions and targetaccount in self.transactions:
+            print("YES")
+            temp = {
+                    num: [self.transactions[num],
+                    {
+                        'transaction_type': "T-",
+                        'amount': amount,
+                        'time': self.gettime(),
+                        'targetaccount': targetaccount,
+                        'balance': b.data[num][type1].getBalance()
+                    }]
+                }
+            self.transactions.update(temp)
+            temp = {
+                    num: [self.transactions[num],
+                    {
+                        'transaction_type': "T+",
+                        'amount': amount,
+                        'time': self.gettime(),
+                        'sourceaccount': num,
+                        'balance': b.data[targetaccount][type2].getBalance()
+                    }]
+                }
+            self.transactions.update(temp)
+        elif num not in self.transactions and targetaccount in self.transactions:
+            temp = {
+                      num: {
+                          'transaction_type': "T-",
+                          'amount': amount,
+                          'time': self.gettime(),
+                          'targetaccount': targetaccount,
+                          'balance': b.data[num][type1].getBalance()
+                      }
+            }
+            self.transactions.update(temp)
+
+            temp = {
+                num: [self.transactions[num],
+                      {
+                          'transaction_type': "T+",
+                          'amount': amount,
+                          'time': self.gettime(),
+                          'sourceaccount': num,
+                          'balance': b.data[targetaccount][type2].getBalance()
+                      }]
+            }
+            self.transactions.update(temp)
+        elif num in self.transactions and targetaccount not in self.transactions:
+            print("Test")
+            print(self.transactions)
+            print()
+            temporary = {
+                          'transaction_type': "T-",
+                          'amount': amount,
+                          'time': self.gettime(),
+                          'targetaccount': targetaccount,
+                          'balance': b.data[num][type1].getBalance()
+                      }
+            self.transactions[num].append(temporary)
+            temp = {
+                num: [self.transactions[num].append(temporary)
+                      
+                      {
+                          'transaction_type': "T-",
+                          'amount': amount,
+                          'time': self.gettime(),
+                          'targetaccount': targetaccount,
+                          'balance': b.data[num][type1].getBalance()
+                      }]
+            temp = {
+                  'transaction_type': "T+",
+                  'amount': amount,
+                  'time': self.gettime(),
+                  'sourceaccount': num,
+                  'balance': b.data[targetaccount][type2].getBalance()
+            }
+            self.transactions[num].append(temp)
+        else:
+            temp = {
+                num: {
+                    'transaction_type': "T-",
+                    'amount': amount,
+                    'time': self.gettime(),
+                    'targetaccount': targetaccount,
+                    'balance': b.data[num][type1].getBalance()
+                }
+            }
+            self.transactions.update(temp)
+            temp = {
+                num: {
+                    'transaction_type': "T+",
+                    'amount': amount,
+                    'time': self.gettime(),
+                    'sourceaccount': num,
+                    'balance': b.data[targetaccount][type2].getBalance()
+                }
+            }
+            self.transactions.update(temp1, temp)
+            print("Here")
+
+        
+        if num not in self.transactions and targetaccount not in self.transactions:
             self.transactions = {
                 num: [{
                     'transaction_type': "T-",
@@ -255,8 +413,8 @@ class TransactionView:
                     'balance': b.data[targetaccount][type2].getBalance()
                 }]
             }
-            self.transactions
-            print("True")
+            print(self.transactions)
+            print("True 1")
         else:
             if num in self.transactions and targetaccount in self.transactions:
                 self.transactions[num].append(
@@ -277,6 +435,7 @@ class TransactionView:
                         'balance': b.data[targetaccount][type2].getBalance()
                     }
                 )
+
             elif num in self.transactions and targetaccount not in self.transactions:
                 self.transactions[num].append(
                     {
@@ -295,49 +454,4 @@ class TransactionView:
                         'sourceaccount': num,
                         'balance': b.data[targetaccount][type2].getBalance()
                     }
-            elif num not in self.transactions and targetaccount in self.transactions:
-                self.transactions[num] = \
-                    {
-                        'transaction_type': "T-",
-                        'amount': amount,
-                        'time': self.gettime(),
-                        'targetaccount': targetaccount,
-                        'balance': b.data[num][type1].getBalance()
-                    }
-                self.transactions[num].append(
-                    {
-                        'transaction_type': "T+",
-                        'amount': amount,
-                        'time': self.gettime(),
-                        'sourceaccount': num,
-                        'balance': b.data[targetaccount][type2].getBalance()
-                    }
-                )
-            else:
-                self.transactions[num] = \
-                    {
-                        'transaction_type': "T-",
-                        'amount': amount,
-                        'time': self.gettime(),
-                        'targetaccount': targetaccount,
-                        'balance': b.data[num][type1].getBalance()
-                    }
-                self.transactions[targetaccount] = \
-                    {
-                        'transaction_type': "T+",
-                        'amount': amount,
-                        'time': self.gettime(),
-                        'sourceaccount': num,
-                        'balance': b.data[targetaccount][type2].getBalance()
-                    }
-
-            """
-                self.transactions = {
-                    num: [{
-                        'transaction_type': "T+",
-                        'amount': amount,
-                        'time': "time",
-                        'sourceaccount': num,
-                        'balance': b.data[targetaccount][type2].getBalance()
-                    }]
-                }"""
+                print(False)"""
