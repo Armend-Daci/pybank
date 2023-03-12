@@ -424,13 +424,13 @@ if __name__ == '__main__':
             }
         ],
     }
-    print(testtransaction[10000][2])
+    #print(testtransaction[10000][2])
     b = Bank()
     t = TransactionView()
 
     t.addDeposit(10008, 200, b)
     t.addDeposit(10001, 450, b)
-    t.addDeposit(10008, 200, b)
+    t.addDeposit(10008, 100.34, b)
     #t.addWithdraw(10008, 300, b)
 
     t.addDeposit(10008, 20000, b)

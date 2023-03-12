@@ -171,6 +171,7 @@ class TransactionView:
                 }
             }
             self.transactions.update(temp)
+            print(self.transactions)
         elif num in self.transactions:
             print("Appending... from Deposit")
             """
@@ -188,13 +189,15 @@ class TransactionView:
                 }
             list1 = []
 
+            print("Here... ", self.transactions[num])
+            print(self.transactions)
             for i in self.transactions[num]:
-                list1.append(i)
 
-            if 'transaction_type' in list1:
-                list1.remove("transaction_type")
-                list1.remove("amount")
-                list1.remove("time")
+                print(1, i)
+                if type(i) == dict:
+                    list1.append(i)
+                    print("RUN")
+
             list1.append(first)
 
             print(123, list1)
