@@ -434,14 +434,15 @@ if __name__ == '__main__':
     t.addDeposit(10008, 100.34, b)
     print(t.transactions, 2)
     #t.addWithdraw(10008, 300, b)
-
+    t.addDeposit(10001, 500, b)
+    t.addDeposit(10001, 1000.23, b)
     t.addDeposit(10008, 20000, b)
     t.addDeposit(10008, 530.40, b)
     t.addDeposit(10008, 4058.34, b)
     #t.addTransfer(10008, 400, 10006, b, "checking", "savings")
 
     print(t.transactions, 1)
-
+    t.printAccount(10008)
     """
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")

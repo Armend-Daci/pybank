@@ -162,7 +162,6 @@ class TransactionView:
 
     def addDeposit(self, num, amount, b):
         if num not in self.transactions:
-            list1 = []
             print("Updating... from Deposit")
             temp = {
                 num: [{
@@ -172,7 +171,6 @@ class TransactionView:
                 }]
             }
             self.transactions.update(temp)
-            print(self.transactions)
         elif num in self.transactions:
             print("Appending... from Deposit")
 
@@ -182,38 +180,12 @@ class TransactionView:
                     'time': self.gettime()
                 }
             list1 = []
-            #list1.append(prev)
-            print(first)
-            print("Here... ", self.transactions[num])
-            print(self.transactions)
-            count = 0
-            for key, values in enumerate(self.transactions[num]):
-                print(key, values)
-                if key == 0:
-                    count += 1
-            if count == 1:
-                print("------------------")
-                quick = self.transactions[num]
 
-                print(quick[0]['amount'])
-                a = quick[0]['amount']
-                t = quick[0]['time']
-                #print(quick['transaction_type'], quick['amount'])
-                prev = {
-                    'transaction_type': "D",
-                    'amount': a,
-                    'time': t
-                }
-                #list1.append(prev)
-            print(self.transactions[num])
-            print(list1)
             for key, values in enumerate(self.transactions):
                 print("Begin", self.transactions.keys(), key, values)
                 print(len(self.transactions[num]))
                 if values == num:
-                    #list1.append(values[0])
                     print(list1, "HERE")
-                print(list1, "test")
             for i in self.transactions[num]:
                 print(self.transactions[num])
                 print(1, i)
@@ -325,3 +297,9 @@ class TransactionView:
             }
             }
             self.transactions.append(temp)
+
+    def printAccount(self, num):
+        print(f"Account#{num}:")
+        for i in self.transactions[num]:
+            if i['transaction_type'] == "D":
+                print(f"Deposited {i['amount']} into your account at {i['time']}")
