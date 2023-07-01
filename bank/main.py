@@ -21,17 +21,17 @@ def initialmenu():
         user = {}
         user = b.data[num]
 
-
         if b.data[num] == user and "NO_CHECKING" in str(user['checking']):
             accounttype = "S"
-        elif b.data[num] == user and "NO_SAVINGS" in str(user['savings']): #'== "NO_SAVINGS":
+        elif b.data[num] == user and "NO_SAVINGS" in str(user['savings']):  # '== "NO_SAVINGS":
             accounttype = "C"
             print(1)
-        elif b.data[num] == user and user['checking'].getBalance() != "NO_CHECKING" and user['savings'].getBalance() != "NO_SAVINGS":
+        elif b.data[num] == user and user['checking'].getBalance() != "NO_CHECKING" and user[
+            'savings'].getBalance() != "NO_SAVINGS":
             accounttype = "B"
         print(str(user['savings']))
         input()
-        #type = finder(list, num, accountnum)  # finder checks for if you have a C, S or B
+        # type = finder(list, num, accountnum)  # finder checks for if you have a C, S or B
         amount = 0
 
         print(accounttype)
@@ -57,12 +57,12 @@ def initialmenu():
             if accounttype == "C":
                 accountnum = accountcreator(b.data, accounttype)
                 b.data[accountnum] = {
-                        "first_name": fname,
-                        "last_name": lname,
-                        "password": pwd,
-                        "checking": deposit,
-                        "savings": "NO_SAVINGS"
-                    }
+                    "first_name": fname,
+                    "last_name": lname,
+                    "password": pwd,
+                    "checking": deposit,
+                    "savings": "NO_SAVINGS"
+                }
                 print(
                     f"Success {fname} {lname} has created a new checking account number {accountnum} with a total balance of {deposit}!")
 
@@ -96,7 +96,7 @@ def initialmenu():
                             deposit))
                 print(f"Success account#{list[num].getAccount()} now has a Savings Account with a balance of {deposit}")
                 print("Taking you to main menu...")
-                #main()
+                # main()
             elif type == "S":
                 print("How much would you like to deposit into your new Checking Account?")
                 deposit = int(input())
@@ -105,11 +105,11 @@ def initialmenu():
                 print(
                     f"Success account#{list[num].getAccount()} now has a Checking Account with a balance of {deposit}")
                 print("Taking you to main menu...")
-                #main()
+                # main()
             elif type == "B":
                 print("You already have two accounts!")
                 print("Taking you to main menu...")
-                #main()
+                # main()
             initialmenu()
 
 
@@ -148,7 +148,7 @@ def login(data, accountnum, pwd):
 
 def finder(list, num, accountnum):
     total = 0
-    #print(list[0].getBank().getAccountType)
+    # print(list[0].getBank().getAccountType)
     for key, values in enumerate(list):
         print(values.getBank().getAccount(), accountnum)
         if values.getBank().getAccount() == accountnum:
@@ -167,11 +167,14 @@ def viewer(user, num, type):
     dualaccount = ""
     print(type)
 
-    if type == "C":
+    if type == "C": #If Account is Checking
+        checking = user['checking']
         if user['checking'].isActive == False:
-            print(f"Your account is currently disabled, please deposit a minimum of ${user['checking'].getBalance()} to reactivate your account.")
+            print(
+                f"Your account is currently disabled, please deposit a minimum of ${user['checking'].getBalance()} to reactivate your account.")
             while user['checking'].getBalance() < 0:
-                reactivateamount = float(input(f"Please enter the amount you would like to deposit: (Must be greater than {user['checking'].getBalance()}"))
+                reactivateamount = float(input(
+                    f"Please enter the amount you would like to deposit: (Must be greater than {user['checking'].getBalance()}"))
                 if reactivateamount + user['checking'].getBalance() >= 0:
                     user['checking'].deposit(reactivateamount)
                 else:
@@ -182,11 +185,13 @@ def viewer(user, num, type):
             f"Hello {user['first_name']} {user['last_name']}, the balance for Checking account #{num} is {user['checking'].getBalance()}")
         choice = input("Would you like to deposit, withdraw, or transfer?").upper()
 
-    elif type == "S":
+    elif type == "S":   #If Account is savings
         if user['savings'].isActive == False:
-            print(f"Your account is currently disabled, please deposit a minimum of ${user['savings'].getBalance()} to reactivate your account.")
+            print(
+                f"Your account is currently disabled, please deposit a minimum of ${user['savings'].getBalance()} to reactivate your account.")
             while user['savings'].getBalance() < 0:
-                reactivateamount = float(input(f"Please enter the amount you would like to deposit: (Must be greater than {user['savings'].getBalance()}"))
+                reactivateamount = float(input(
+                    f"Please enter the amount you would like to deposit: (Must be greater than {user['savings'].getBalance()}"))
                 if reactivateamount + user['savings'].getBalance() >= 0:
                     user['savings'].deposit(reactivateamount)
                 else:
@@ -196,7 +201,7 @@ def viewer(user, num, type):
             f"Hello {user['first_name']} {user['last_name']}, the balance for Savings account #{num} is {user['savings'].getBalance()}")
         choice = input("Would you like to deposit, withdraw, or transfer?").upper()
 
-    elif type == "B":
+    elif type == "B":   #If you have both accounts asks which you would like to use
         dualaccount = "A"
         while dualaccount != "C" and dualaccount != "S":
             print(f"Currently using Checking Account#{num}")
@@ -207,13 +212,13 @@ def viewer(user, num, type):
             elif dualaccount == "N":
                 dualaccount = "C"
 
-        if dualaccount == "C":
+        if dualaccount == "C": #Using Checking Account
             if user['checking'].isActive == False:
                 print(
                     f"Your account is currently disabled, please deposit a minimum of ${user['checking'].getBalance()} to reactivate your account.")
                 while user['checking'].getBalance() < 0:
                     reactivateamount = float(input(
-                        f"Please enter the amount you would like to deposit: (Must be greater than {user['checking'].getBalance()}"))
+                        f"Pleatransferse enter the amount you would like to deposit: (Must be greater than {user['checking'].getBalance()}"))
                     if reactivateamount + user['checking'].getBalance() >= 0:
                         user['checking'].deposit(reactivateamount)
                     else:
@@ -249,15 +254,17 @@ def viewer(user, num, type):
         print(f"Current Balance: {checking}")
         amount = float(input())
         checking.deposit(amount)
+        t.addDeposit(num, amount, checking.getBalance(), b)
         print(checking.getBalance())
         b.data[num]['checking'] = user['checking']
     elif choice == "D" and type == "S" or dualaccount == "S" and type == "B" and choice == "D":
-        print(choice,type,dualaccount,type)
+        print(choice, type, dualaccount, type)
         savings = user['savings']
         print("How much would you like to deposit in your Savings Account?")
         print(f"Current Balance: {savings}")
         amount = float(input())
         savings.deposit(amount)
+        t.addDeposit(num, amount, savings.getBalance(), b)
         print(savings.getBalance())
         b.data[num]['savings'] = user['savings']
     elif choice == "W" and type == "C" or dualaccount == "C" and type == "B" and choice == "W":
@@ -268,6 +275,7 @@ def viewer(user, num, type):
             run += 1
             amount = float(input())
             checking.withdraw(amount)
+            t.addWithdraw(num, amount, checking.getBalance(), b)
             viewer(user, num, type)
             # if list[num].getBalance() - amount < -100:
             #   print("Amount entered is too large! You do not have sufficient funds.")
@@ -279,9 +287,10 @@ def viewer(user, num, type):
             run += 1
             amount = float(input())
             user['savings'].withdraw(amount)
+            t.addWithdraw(num, amount, savings.getBalance(), b)
             viewer(user, num, type)
-    elif choice == "T" and type == "C" or dualaccount == "C" and choice == "T":
-        if type == "B":
+    elif choice == "T" and type == "C" or dualaccount == "C" and choice == "T": #If choice is Transfer and Checking Account OR DualAccount using Checking and choice is Transfer
+        if type == "B": #if you have a DualAccount go here
             print("Would you like to transfer to your Savings Account? Y/N")
             transferself = input().upper()
             if transferself == "Y":
@@ -292,10 +301,11 @@ def viewer(user, num, type):
                 if amount <= user['checking'].getBalance():
                     user['checking'].withdraw(amount)
                     user['savings'].deposit(amount)
-                    print(f"${amount} has been successfully transferred from your Checking Account to your Savings Account!")
+                    print(
+                        f"${amount} has been successfully transferred from your Checking Account to your Savings Account!")
                 else:
                     print("Amount input is invalid! Please try again.")
-        if type != "B" or transferself == "N":
+        if type != "B" or transferself == "N":  #If you dont have a dual account go here
             print("What is the account number you would like to transfer money to?")
             target = int(input("Account#"))
 
@@ -311,7 +321,7 @@ def viewer(user, num, type):
                     accounttype = 'checking'
                 elif temp == "S":
                     accounttype = 'savings'
-
+            print("Check", b.data[num]['checking'].getBalance())
             if target in b.data and target != num and b.data[target]['checking'] != "NO_CHECKING":
                 print(f"How much would you like to transfer to Account#{target}?")
                 targetamount = float(input())
@@ -321,6 +331,7 @@ def viewer(user, num, type):
                 else:
                     user['checking'].withdraw(targetamount)
                     b.data[target][accounttype].deposit(targetamount)
+                    t.addTransfer(num, targetamount, target, b, 'checking', accounttype)
                     print(f"You have successfully transferred ${targetamount} from Account#{num} to Account#{target}")
 
             else:
@@ -381,7 +392,6 @@ def viewer(user, num, type):
         initialmenu()
 
 
-
 if __name__ == '__main__':
     """
     tempdict= {}
@@ -420,7 +430,7 @@ if __name__ == '__main__':
             }
         ],
     }"""
-    #print(testtransaction[10000][2])
+    # print(testtransaction[10000][2])
     b = Bank()
     t = TransactionView()
     print("First")
@@ -430,13 +440,13 @@ if __name__ == '__main__':
     print(t.transactions, 1)
     t.addDeposit(10008, 100.34, b.data[10008]['checking'].getBalance(), b)
     print(t.transactions, 2)
-    #t.addWithdraw(10008, 300, b)
+    # t.addWithdraw(10008, 300, b)
     t.addDeposit(10001, 500, b.data[10001].get, b)
     t.addDeposit(10001, 1000.23, b.data[10001].get, b)
     t.addDeposit(10008, 20000, b.data[10008]['checking'].getBalance(), b)
     t.addDeposit(10008, 530.40, b.data[10008]['checking'].getBalance(), b)
     t.addDeposit(10008, 4058.34, b.data[10008]['checking'].getBalance(), b)
-    #t.addTransfer(10008, 400, 10006, b, "checking", "savings")
+    # t.addTransfer(10008, 400, 10006, b, "checking", "savings")
 
     print(t.transactions, 1)
     t.printAccount(10008)
@@ -446,4 +456,3 @@ if __name__ == '__main__':
     current_time = now.strftime("%H:%M:%S")
     print("Current Time =", current_time)"""
     initialmenu()
-

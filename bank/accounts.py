@@ -23,6 +23,7 @@ class Checking:
             self.isActive == True
             self.overdraft = 0
 
+
     def getBalance(self):
         return self.balance
 
@@ -228,6 +229,7 @@ class TransactionView:
             self.transactions[num].append(temp)
 
     def addTransfer(self, num, amount, targetaccount, b, type1, type2):
+        #num is source account, targetaccount is the targetaccount, type1 is the accounttype of the source and type2 for the targetaccountf
         if num in self.transactions and targetaccount in self.transactions:
             temp = {
                 'transaction_type': "T-",
@@ -265,6 +267,7 @@ class TransactionView:
             }
             self.transactions[targetaccount].append(temp)
         elif num in self.transactions and targetaccount not in self.transactions:
+            print(type(b.data[num]['checking'].getBalance()), "---", type(type1))
             temp = {
                 'transaction_type': "T-",
                 'amount': amount,
@@ -282,6 +285,7 @@ class TransactionView:
             }
             }
             self.transactions.update(temp)
+            print(self.transactions)
         else:
             temp = { num: {
                 'transaction_type': "T-",
