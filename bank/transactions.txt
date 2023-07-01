@@ -1,0 +1,1 @@
+{10008: [{'transaction_type': 'D', 'amount': 200, 'balance': 4000, 'time': '03:34:40 PM Sat, Jul 01, 2023'}, {'transaction_type': 'D', 'amount': 578, 'balance': 4578, 'time': '03:34:40 PM Sat, Jul 01, 2023'}]}

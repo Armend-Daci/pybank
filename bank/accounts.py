@@ -172,10 +172,10 @@ class TransactionView:
             print("Updating... from Deposit")
             temp = {
                 num: [{
-                    'transaction_type': "D",
-                    'amount': amount,
-                    'balance': balance,
-                    'time': self.gettime()
+                    "transaction_type": "D",
+                    "amount": amount,
+                    "balance": balance,
+                    "time": self.gettime()
                 }]
             }
             self.transactions.update(temp)
@@ -183,10 +183,10 @@ class TransactionView:
             print("Appending... from Deposit")
 
             first = {
-                'transaction_type': "D",
-                'amount': amount,
-                'balance': balance,
-                'time': self.gettime()
+                "transaction_type": "D",
+                "amount": amount,
+                "balance": balance,
+                "time": self.gettime()
             }
             list1 = []
 
@@ -217,19 +217,19 @@ class TransactionView:
         if num not in self.transactions:
             temp = {
                 num: {
-                    'transaction_type': "W",
-                    'amount': amount,
-                    'balance': balance,
-                    'time': self.gettime()
+                    "transaction_type": "W",
+                    "amount": amount,
+                    "balance": balance,
+                    "time": self.gettime()
                 }
             }
             self.transactions.update(temp)
         elif num in self.transactions:
             temp = {
-                'transaction_type': "W",
-                'amount': amount,
-                'balance': balance,
-                'time': self.gettime()
+                "transaction_type": "W",
+                "amount": amount,
+                "balance": balance,
+                "time": self.gettime()
             }
             self.transactions[num].update(temp)
 
@@ -237,76 +237,76 @@ class TransactionView:
         # num is source account, targetaccount is the targetaccount, type1 is the accounttype of the source and type2 for the targetaccountf
         if num in self.transactions and targetaccount in self.transactions:
             temp = {
-                'transaction_type': "T-",
-                'amount': amount,
-                'time': self.gettime(),
-                'targetaccount': targetaccount,
-                'balance': b.data[num][type1].getBalance()
+                "transaction_type": "T-",
+                "amount": amount,
+                "time": self.gettime(),
+                "targetaccount": targetaccount,
+                "balance": b.data[num][type1].getBalance()
             }
             self.transactions[num].append(temp)
             temp = {
-                'transaction_type': "T+",
-                'amount': amount,
-                'time': self.gettime(),
-                'sourceaccount': num,
-                'balance': b.data[targetaccount][type2].getBalance()
+                "transaction_type": "T+",
+                "amount": amount,
+                "time": self.gettime(),
+                "sourceaccount": num,
+                "balance": b.data[targetaccount][type2].getBalance()
             }
             self.transactions[targetaccount].append(temp)
         elif num not in self.transactions and targetaccount in self.transactions:
             temp = {num: {
-                'transaction_type': "T-",
-                'amount': amount,
-                'time': self.gettime(),
-                'targetaccount': targetaccount,
-                'balance': b.data[num][type1].getBalance()
+                "transaction_type": "T-",
+                "amount": amount,
+                "time": self.gettime(),
+                "targetaccount": targetaccount,
+                "balance": b.data[num][type1].getBalance()
             }
             }
             self.transactions.append(temp)
 
             temp = {
-                'transaction_type': "T+",
-                'amount': amount,
-                'time': self.gettime(),
-                'sourceaccount': num,
-                'balance': b.data[targetaccount][type2].getBalance()
+                "transaction_type": "T+",
+                "amount": amount,
+                "time": self.gettime(),
+                "sourceaccount": num,
+                "balance": b.data[targetaccount][type2].getBalance()
             }
             self.transactions[targetaccount].append(temp)
         elif num in self.transactions and targetaccount not in self.transactions:
             print(type(b.data[num]['checking'].getBalance()), "---", type(type1))
             temp = {
-                'transaction_type': "T-",
-                'amount': amount,
-                'time': self.gettime(),
-                'targetaccount': targetaccount,
-                'balance': b.data[num][type1].getBalance()
+                "transaction_type": "T-",
+                "amount": amount,
+                "time": self.gettime(),
+                "targetaccount": targetaccount,
+                "balance": b.data[num][type1].getBalance()
             }
             self.transactions[num].append(temp)
             temp = {targetaccount: {
-                'transaction_type': "T+",
-                'amount': amount,
-                'time': self.gettime(),
-                'sourceaccount': num,
-                'balance': b.data[targetaccount][type2].getBalance()
+                "transaction_type": "T+",
+                "amount": amount,
+                "time": self.gettime(),
+                "sourceaccount": num,
+                "balance": b.data[targetaccount][type2].getBalance()
             }
             }
             self.transactions.update(temp)
             print(self.transactions)
         else:
             temp = {num: {
-                'transaction_type': "T-",
-                'amount': amount,
-                'time': self.gettime(),
-                'targetaccount': targetaccount,
-                'balance': b.data[num][type1].getBalance()
+                "transaction_type": "T-",
+                "amount": amount,
+                "time": self.gettime(),
+                "targetaccount": targetaccount,
+                "balance": b.data[num][type1].getBalance()
             }
             }
             self.transactions.update(temp)
             temp = {targetaccount: {
-                'transaction_type': "T+",
-                'amount': amount,
-                'time': self.gettime(),
-                'sourceaccount': num,
-                'balance': b.data[targetaccount][type2].getBalance()
+                "transaction_type": "T+",
+                "amount": amount,
+                "time": self.gettime(),
+                "sourceaccount": num,
+                "balance": b.data[targetaccount][type2].getBalance()
             }
             }
             self.transactions.append(temp)
@@ -314,7 +314,7 @@ class TransactionView:
     def printAccount(self, num):
         print(f"Account#{num}:")
         for i in self.transactions[num]:
-            tempamount = round(i['amount'], 2)
+            tempamount = round(i["amount"], 2)
             if i['transaction_type'] == "D":
                 print(f"Deposited ${tempamount:.2f} into your account at {i['time']}")
                 print(f"Balance: {i['balance']}")

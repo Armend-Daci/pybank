@@ -1,7 +1,7 @@
 from bank.accounts import *
 from datetime import datetime
 import time
-
+import ast
 
 def initialmenu():
     print("What would you like to do? 1- Log in. 2- Create a new account.")
@@ -456,5 +456,46 @@ if __name__ == '__main__':
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     print("Current Time =", current_time)"""
+    print("Opening")
+    f = open("bank/transactions.txt", "r")
+    test = f.read()
+    print(test)
+    result = ast.literal_eval(test)
+    print(result)
+    print(type(result))
+    print(result[10008])
+    #for key, value in enumerate(data):
+        #print(key)
+
+    # print("Dict", test)
+    # print(type(test))
+    t.addDeposit(10008, 200, 4000, b)
+    t.addDeposit(10008, 578, 4578, b)
+    print(t.transactions)
+    f = open("bank/transactions.txt", "w")
+    f.write(str(t.transactions))
+    f.close()
     initialmenu()
 
+"""
+    transaction = {
+        10000: [
+            {
+                'transaction_type': "D",
+                'amount': 400,
+                'time': "time"
+            },
+            {
+                'transaction_type': "W",
+                'amount': 400,
+                'time': "time"
+            },
+            {
+                'transaction_type': "T",
+                'amount': 400,
+                'time': "time",
+                'targetaccount': "target"
+            }
+        ],
+    }
+"""
