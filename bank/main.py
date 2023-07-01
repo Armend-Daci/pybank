@@ -383,6 +383,7 @@ def viewer(user, num, type):
 
 
 if __name__ == '__main__':
+    """
     tempdict= {}
     temp1 = {
         1000: {
@@ -396,13 +397,8 @@ if __name__ == '__main__':
             "t": 300
         }]
     }
-    #tempdict[1000].append(temp)
     tempdict.update(temp2)
     print(tempdict)
-
-
-    input()
-
 
     testtransaction = {
         10000: [
@@ -423,31 +419,31 @@ if __name__ == '__main__':
                 'targetaccount': "target"
             }
         ],
-    }
+    }"""
     #print(testtransaction[10000][2])
     b = Bank()
     t = TransactionView()
-
-    t.addDeposit(10008, 200, b.data[10008].get b)
-    t.addDeposit(10001, 450, b)
+    print("First")
+    print(type(b.data[10008]['checking']))
+    t.addDeposit(10008, 200, b.data[10008]['checking'].getBalance(), b)
+    t.addDeposit(10001, 450, b.data[10001].get, b)
     print(t.transactions, 1)
-    t.addDeposit(10008, 100.34, b)
+    t.addDeposit(10008, 100.34, b.data[10008]['checking'].getBalance(), b)
     print(t.transactions, 2)
     #t.addWithdraw(10008, 300, b)
-    t.addDeposit(10001, 500, b)
-    t.addDeposit(10001, 1000.23, b)
-    t.addDeposit(10008, 20000, b)
-    t.addDeposit(10008, 530.40, b)
-    t.addDeposit(10008, 4058.34, b)
+    t.addDeposit(10001, 500, b.data[10001].get, b)
+    t.addDeposit(10001, 1000.23, b.data[10001].get, b)
+    t.addDeposit(10008, 20000, b.data[10008]['checking'].getBalance(), b)
+    t.addDeposit(10008, 530.40, b.data[10008]['checking'].getBalance(), b)
+    t.addDeposit(10008, 4058.34, b.data[10008]['checking'].getBalance(), b)
     #t.addTransfer(10008, 400, 10006, b, "checking", "savings")
 
     print(t.transactions, 1)
     t.printAccount(10008)
+    print(t.transactions[10008])
     """
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     print("Current Time =", current_time)"""
-
-    input()
     initialmenu()
 
