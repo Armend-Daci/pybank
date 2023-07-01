@@ -160,13 +160,14 @@ class TransactionView:
         print(current_time)
         return current_time
 
-    def addDeposit(self, num, amount, b):
+    def addDeposit(self, num, amount, balance, b):
         if num not in self.transactions:
             print("Updating... from Deposit")
             temp = {
                 num: [{
                     'transaction_type': "D",
                     'amount': amount,
+                    'balance': balance,
                     'time': self.gettime()
                 }]
             }
@@ -177,6 +178,7 @@ class TransactionView:
             first = {
                     'transaction_type': "D",
                     'amount': amount,
+                    'balance': balance,
                     'time': self.gettime()
                 }
             list1 = []
@@ -204,13 +206,14 @@ class TransactionView:
             self.transactions.update(temp)
             print("Check here", self.transactions[num])
 
-    def addWithdraw(self, num, amount, b):
+    def addWithdraw(self, num, amount, balance, b):
         print(num,self.transactions.keys())
         if num not in self.transactions:
             temp = {
                 num: {
                     'transaction_type': "W",
                     'amount': amount,
+                    'balance': balance,
                     'time': self.gettime()
                 }
             }
@@ -219,6 +222,7 @@ class TransactionView:
             temp = {
                 'transaction_type': "W",
                 'amount': amount,
+                'balance': balance,
                 'time': self.gettime()
             }
             self.transactions[num].append(temp)
@@ -301,5 +305,9 @@ class TransactionView:
     def printAccount(self, num):
         print(f"Account#{num}:")
         for i in self.transactions[num]:
+            tempamount = round(i['amount'], 2)
             if i['transaction_type'] == "D":
-                print(f"Deposited {i['amount']} into your account at {i['time']}")
+                print(f"Deposited ${tempamount:.2f} into your account at {i['time']}")
+                print(f"Balance: {i['balance']}")
+            elif i['transaction_type'] == "W":
+                print(f"Withdrawn ${tempamount:.2f} out of your account at {i['time']}")
