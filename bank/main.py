@@ -433,6 +433,7 @@ if __name__ == '__main__':
     # print(testtransaction[10000][2])
     b = Bank()
     t = TransactionView()
+    """
     print("First")
     print(type(b.data[10008]['checking']))
     t.addDeposit(10008, 200, b.data[10008]['checking'].getBalance(), b)
@@ -446,13 +447,13 @@ if __name__ == '__main__':
     t.addDeposit(10008, 20000, b.data[10008]['checking'].getBalance(), b)
     t.addDeposit(10008, 530.40, b.data[10008]['checking'].getBalance(), b)
     t.addDeposit(10008, 4058.34, b.data[10008]['checking'].getBalance(), b)
-    # t.addTransfer(10008, 400, 10006, b, "checking", "savings")
+    # t.addTransfer(10008, 400, 10006, b, "checking", "savings")"""
 
     print(t.transactions, 1)
-    t.printAccount(10008)
-    print(t.transactions[10008])
+    #t.printAccount(10008)
     """
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     print("Current Time =", current_time)"""
     initialmenu()
+

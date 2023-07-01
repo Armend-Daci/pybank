@@ -28,12 +28,17 @@ class Checking:
         return self.balance
 
     def withdraw(self, amount):
-        if amount <= self.balance:
+        if amount <= self.balance:  #If Balance is less than or equal to balance do the withdrawal
             self.balance -= amount
             print(f"Transaction successful. New balance is: {self.balance}")
-        elif amount > self.balance and self.balance - amount > -100:
+        elif amount > self.balance and self.balance - amount > -100:    #If the amount is greater than the balance then add a overdraft fee and do the withdrawal
             self.balance = self.balance - amount - 35
-            print(f"You have withdrawn more than your current balance, so an overdraft fee of $35 has been applied.")
+            if self.balance >= -100:
+                print(f"You have withdrawn more than your current balance, so an overdraft fee of $35 has been applied "
+                      f"and your account has been deactivated until the amount due is paid.")
+                self.isActive = False
+            else:
+                print(f"You have withdrawn more than your current balance, so an overdraft fee of $35 has been applied.")
             print(f"New balance is: {self.balance}")
             self.overdraft += 1
             if self.overdraft == 2:
