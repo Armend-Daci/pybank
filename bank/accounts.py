@@ -1,6 +1,7 @@
 import time
 from datetime import datetime
 
+
 class Checking:
     def __init__(self, deposit):
         self.balance = float(0)
@@ -23,23 +24,23 @@ class Checking:
             self.isActive == True
             self.overdraft = 0
 
-
     def getBalance(self):
         return self.balance
 
     def withdraw(self, amount):
-        if amount <= self.balance:  #If Balance is less than or equal to balance do the withdrawal
+        if amount <= self.balance:  # If Balance is less than or equal to balance do the withdrawal
             self.balance -= amount
             print(f"Transaction successful. New balance is: {self.balance}")
-        elif amount > self.balance and self.balance - amount > -100:    #If the amount is greater than the balance then add a overdraft fee and do the withdrawal
+        elif amount > self.balance and self.balance - amount > -100:  # If the amount is greater than the balance then add a overdraft fee and do the withdrawal
             self.balance = self.balance - amount - 35
-            if self.balance >= -100:
+            if self.balance <= -100:
                 print(f"You have withdrawn more than your current balance, so an overdraft fee of $35 has been applied "
                       f"and your account has been deactivated until the amount due is paid.")
                 self.isActive = False
             else:
-                print(f"You have withdrawn more than your current balance, so an overdraft fee of $35 has been applied.")
-            print(f"New balance is: {self.balance}")
+                print(
+                    f"You have withdrawn more than your current balance, so an overdraft fee of $35 has been applied.")
+            print(f"New balance is: ${self.balance:.2f}")
             self.overdraft += 1
             if self.overdraft == 2:
                 self.isActive = False
@@ -182,11 +183,11 @@ class TransactionView:
             print("Appending... from Deposit")
 
             first = {
-                    'transaction_type': "D",
-                    'amount': amount,
-                    'balance': balance,
-                    'time': self.gettime()
-                }
+                'transaction_type': "D",
+                'amount': amount,
+                'balance': balance,
+                'time': self.gettime()
+            }
             list1 = []
 
             for key, values in enumerate(self.transactions):
@@ -198,7 +199,6 @@ class TransactionView:
                 print(self.transactions[num])
                 print(1, i)
                 if type(i) == dict:
-
                     list1.append(i)
                     print("RUN")
             list1.append(first)
@@ -213,7 +213,7 @@ class TransactionView:
             print("Check here", self.transactions[num])
 
     def addWithdraw(self, num, amount, balance, b):
-        print(num,self.transactions.keys())
+        print(num, self.transactions.keys())
         if num not in self.transactions:
             temp = {
                 num: {
@@ -231,10 +231,10 @@ class TransactionView:
                 'balance': balance,
                 'time': self.gettime()
             }
-            self.transactions[num].append(temp)
+            self.transactions[num].update(temp)
 
     def addTransfer(self, num, amount, targetaccount, b, type1, type2):
-        #num is source account, targetaccount is the targetaccount, type1 is the accounttype of the source and type2 for the targetaccountf
+        # num is source account, targetaccount is the targetaccount, type1 is the accounttype of the source and type2 for the targetaccountf
         if num in self.transactions and targetaccount in self.transactions:
             temp = {
                 'transaction_type': "T-",
@@ -253,13 +253,13 @@ class TransactionView:
             }
             self.transactions[targetaccount].append(temp)
         elif num not in self.transactions and targetaccount in self.transactions:
-            temp = { num: {
-                    'transaction_type': "T-",
-                    'amount': amount,
-                    'time': self.gettime(),
-                    'targetaccount': targetaccount,
-                    'balance': b.data[num][type1].getBalance()
-                }
+            temp = {num: {
+                'transaction_type': "T-",
+                'amount': amount,
+                'time': self.gettime(),
+                'targetaccount': targetaccount,
+                'balance': b.data[num][type1].getBalance()
+            }
             }
             self.transactions.append(temp)
 
@@ -281,27 +281,27 @@ class TransactionView:
                 'balance': b.data[num][type1].getBalance()
             }
             self.transactions[num].append(temp)
-            temp = { targetaccount: {
-                    'transaction_type': "T+",
-                    'amount': amount,
-                    'time': self.gettime(),
-                    'sourceaccount': num,
-                    'balance': b.data[targetaccount][type2].getBalance()
+            temp = {targetaccount: {
+                'transaction_type': "T+",
+                'amount': amount,
+                'time': self.gettime(),
+                'sourceaccount': num,
+                'balance': b.data[targetaccount][type2].getBalance()
             }
             }
             self.transactions.update(temp)
             print(self.transactions)
         else:
-            temp = { num: {
+            temp = {num: {
                 'transaction_type': "T-",
                 'amount': amount,
                 'time': self.gettime(),
                 'targetaccount': targetaccount,
                 'balance': b.data[num][type1].getBalance()
-                }
+            }
             }
             self.transactions.update(temp)
-            temp = { targetaccount: {
+            temp = {targetaccount: {
                 'transaction_type': "T+",
                 'amount': amount,
                 'time': self.gettime(),

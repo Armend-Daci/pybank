@@ -174,15 +174,15 @@ def viewer(user, num, type):
                 f"Your account is currently disabled, please deposit a minimum of ${user['checking'].getBalance()} to reactivate your account.")
             while user['checking'].getBalance() < 0:
                 reactivateamount = float(input(
-                    f"Please enter the amount you would like to deposit: (Must be greater than {user['checking'].getBalance()}"))
+                    f"Please enter the amount you would like to deposit: (Must be greater than ${user['checking'].getBalance():.2f}"))
                 if reactivateamount + user['checking'].getBalance() >= 0:
                     user['checking'].deposit(reactivateamount)
                 else:
-                    print(f"Invalid amount, please make a deposit of at least: {user['checking'].getBalance()}")
+                    print(f"Invalid amount, please make a deposit of at least: ${user['checking'].getBalance():.2f}")
                 print("Success, your account has been reactivated!")
 
         print(
-            f"Hello {user['first_name']} {user['last_name']}, the balance for Checking account #{num} is {user['checking'].getBalance()}")
+            f"Hello {user['first_name']} {user['last_name']}, the balance for Checking account #{num} is ${user['checking'].getBalance():.2f}")
         choice = input("Would you like to deposit, withdraw, or transfer?").upper()
 
     elif type == "S":   #If Account is savings
@@ -276,6 +276,7 @@ def viewer(user, num, type):
             amount = float(input())
             checking.withdraw(amount)
             t.addWithdraw(num, amount, checking.getBalance(), b)
+            print(t.transactions[num])
             viewer(user, num, type)
             # if list[num].getBalance() - amount < -100:
             #   print("Amount entered is too large! You do not have sufficient funds.")
