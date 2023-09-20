@@ -29,7 +29,9 @@ def initialmenu():
         elif b.data[num] == user and user['checking'].getBalance() != "NO_CHECKING" and user[
             'savings'].getBalance() != "NO_SAVINGS":
             accounttype = "B"
-        print(str(user['savings']))
+        num = str(user['savings'])
+        num = float(num)
+        print(f"{num:,}")
         input()
         # type = finder(list, num, accountnum)  # finder checks for if you have a C, S or B
         amount = 0
